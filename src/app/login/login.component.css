@@ -1,0 +1,79 @@
+.login-wrap {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: #feb347; /* Old browsers */
+    background: -moz-linear-gradient(top, #fec169 0%, #feb347 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #fec169 0%,#feb347 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #fec169 0%,#feb347 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fec169', endColorstr='#feb347',GradientType=0 ); /* IE6-9 */
+}
+
+.login-box {
+    width: 100%;
+    height: 100vh;
+    float: left;
+    position: relative;
+}
+
+.login-boxForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 380px;
+    text-align: center;
+    background: #bfbfbd;
+    box-shadow: 0 1px 2px 0 rgba(50,50,50,.2);
+}
+
+.login-boxForm--img img{
+    max-width: 100%;
+    width: 100%;
+}
+
+.login-boxForm input {
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    background: #ffffff;
+    height: 40px;
+    border: 0;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.login-boxForm a {
+    color: #444950;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    width: 100%;
+    text-align: right;
+    float: right;
+    padding: 0 15px;
+}
+
+.login-boxForm button {
+    width: calc(70% - 40px);
+    border-radius: 10px;
+    background: #444950;
+    height: 45px;
+    border: 0;
+    padding: 0 20px;
+    color: #c5c9ce;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#form-login {
+    padding: 30px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .login-boxForm {
+        width: 100vw;
+    }
+
+}

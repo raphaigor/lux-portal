@@ -1,0 +1,121 @@
+@import '../../assets/_site/assets/fonts/line-icons.css';
+@import '../../assets/_site/assets/css/bootstrap.min.css';
+@import '../../assets/_site/assets/css/main.css';
+@import '../../assets/_site/assets/css/responsive.css';
+
+@font-face {
+    font-family: 'titillium_weblight';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-light-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_weblight_italic';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-lightitalic-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-lightitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webregular';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-regular-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'titillium_websemibold';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-semibold-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_websemibold_italic';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-semibolditalic-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-semibolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webblack';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-black-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webbold';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-bold-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webbold_italic';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-bolditalic-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webthin';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-extralight-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-extralight-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webthin_italic';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-extralightitalic-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-extralightitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'titillium_webitalic';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-italic-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'titillium_webblack';
+    src: url('../../assets/_site/assets/fonts/titilliumweb-black-webfont.woff2') format('woff2'),
+    url('../../assets/_site/assets/fonts/titilliumweb-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: #ffffff !important;
+    font-family: 'titillium_webregular', sans-serif;
+}
+
+.text-font {
+    font-family: 'titillium_webregular', sans-serif;
+}
+
+.bt-login {
+  padding: 5px 20px;
+  border-radius: 8px;
+}
+
+.text-font2 {
+    font-weight: 400;
+    font-family: 'titillium_webregular', sans-serif;
+    margin: 0px;
+    font-size: 14px;
+}

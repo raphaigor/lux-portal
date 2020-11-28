@@ -1,0 +1,156 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+    <section class="Title">
+        Relatório >> Vendas Por Usina
+	</section>
+
+	<section class="BoxApp">
+		<form id="form-search-clientes" [formGroup]="formSearch">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome da Usina</label>
+						<select id="status" [formControl]="formSearch.controls.usinaId">
+							<option *ngFor="let usin of listUsinas; let i = index" [value]="usin.id">{{ usin.nome }}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome do Parceiro</label>
+						<select id="status" [formControl]="formSearch.controls.parceiroId">
+							<option *ngFor="let parc of listParceiros; let i = index" [value]="parc.id">{{ parc.razaoSocial }}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome do Vendedor</label>
+						<select id="status" [formControl]="formSearch.controls.vendedorId">
+							<option *ngFor="let vend of listVendedores; let i = index" [value]="vend.id">{{ vend.nome }}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="bt-ajuste">
+						<button class="botao cinza" (click)="limparForm()">Limpar</button>
+						<input class="botao" type="submit" (click)="pesquisar(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<section class="BoxApp" *ngIf="showResult">
+		<div class="actions-relatorio"> 
+			<button class="botao cinza botao-icon" (click)="sendModal()">
+				<i class="fas fa-print"></i>
+				IMPRIMIR
+			</button>
+		</div>
+		<table class="table-relatorio">
+			<thead>
+				<tr>
+					<th>Usina</th>
+					<th>Parceiro</th>
+					<th>Vendedor</th>
+					<th>kwh Vendido</th>
+					<th>Data Inicio</th>
+					<th>Data Termino</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let line of rowData">
+					<td>{{ line.usina }}</td>
+					<td>{{ line.parceiro }}</td>
+					<td>{{ line.vendedor }}</td>
+					<td class="col-right">{{ line.kwhVendido | currency:'BRL':'' }}</td>
+					<td class="col-center">{{ formatDate(line.dataInicio) }}</td>
+					<td class="col-center">{{ formatDate(line.dataTermino) }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+</div>
+
+
+<app-dialog [(visible)]="modalImpressao" class="modal-extra-large3">
+
+	<div class="dialog-header">
+		Imprimir Relatório
+		<a (click)="fecharModalImp()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<div class="actions-relatorio" style="padding: 0 40px;"> 
+			<button class="botao cinza botao-icon" (click)="sendImprimir()">
+				<i class="far fa-file-pdf"></i>
+				EXPORTAR PDF
+			</button>
+			<button class="botao cinza botao-icon" (click)="gerarExcel()">
+				<i class="far fa-file-excel"></i>
+				GERAR XLS
+			</button>
+		</div>
+		<div class="box-impressao" id="myTableElementId">
+			<div class="logo-relatorio">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="assets/img/logo-ic.png"  />
+					</div>
+					<div class="col-md-8">
+						<p class="title-relatorio">Relatório de Vendas por Usina</p>
+					</div>
+				</div>
+			</div>
+			<table class="table-relatorio">
+				<thead>
+					<tr>
+						<th>Usina</th>
+						<th>Parceiro</th>
+						<th>Vendedor</th>
+						<th>kwh Vendido</th>
+						<th>Data Inicio</th>
+						<th>Data Termino</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let line of rowData">
+						<td>{{ line.usina }}</td>
+						<td>{{ line.parceiro }}</td>
+						<td>{{ line.vendedor }}</td>
+						<td class="col-right">{{ line.kwhVendido | currency:'BRL':'' }}</td>
+						<td class="col-center">{{ formatDate(line.dataInicio) }}</td>
+						<td class="col-center">{{ formatDate(line.dataTermino) }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="table-relatorio" id="table-relatorio" style="display: none;">
+				<thead>
+					<tr>
+						<th>Usina</th>
+						<th>Parceiro</th>
+						<th>Vendedor</th>
+						<th>kwh Vendido</th>
+						<th>Data Inicio</th>
+						<th>Data Termino</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let line of rowData">
+						<td>{{ line.usina }}</td>
+						<td>{{ line.parceiro }}</td>
+						<td>{{ line.vendedor }}</td>
+						<td class="col-right">{{ line.kwhVendido }}</td>
+						<td class="col-center">{{ line.dataInicio }}</td>
+						<td class="col-center">{{ line.dataTermino }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</app-dialog>

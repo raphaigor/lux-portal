@@ -1,0 +1,560 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #efefea;
+    font-family: 'Product Sans';
+}
+
+#wrap {
+    padding: 90px 20px 20px 90px;
+}
+
+.botao {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #fea525;
+    margin-right: 10px;
+    color: #cdf9e2;
+    border-radius: 2px;
+}
+
+.botao:last-child {
+    margin-right: 0;
+}
+
+label {
+    margin-bottom: 0px;
+    font-size: 13px;
+}
+
+input[type=text], input[type=password] {
+    border-radius: 2px;
+    height: 35px;
+}
+
+select {
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    padding-left: 10px; 
+    color: #495057;
+    text-transform: uppercase;
+    border-radius: 2px;
+}
+
+textarea {
+    border: 1px solid #ced4da;
+    width: 100%;
+    color: #495057;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+.form-group {
+    margin-bottom: 6px;
+}
+
+.simple-notification-wrapper {
+    z-index: 1005 !important;
+}
+
+.form-control:focus {
+    box-shadow: 0 4px 2px 1px rgba(0,123,255,.25) !important;
+}
+
+.cinza {
+    background: #495057;
+    color: #ffffff;
+}
+
+.app-boxBotoes { 
+    margin-top: 15px;
+}
+
+.app-boxBotoes--direita {
+    width: 100%;
+    text-align: right;
+}
+
+.modal-extra-large .dialog{
+    max-width: 70% !important; 
+}
+
+.modal-extra-large3 .dialog{
+    max-width: 85% !important; 
+}
+
+.modal-extra-large2 .dialog{
+    max-width: 95% !important;
+}
+
+.modal-small .dialog {
+    max-width: 500px !important; 
+}
+
+.modal-pos-1 .dialog {
+    z-index: 1001 !important;
+}
+
+.modal-pos-2 .dialog {
+    z-index: 1002 !important;
+}
+
+.dialog-header {
+    font-size: 22px;
+    border-bottom: 2px solid #fea525;
+    font-weight: bold;
+    padding: 6px 30px 6px 15px;
+    position: relative;
+}
+
+.dialog__close-btn {
+    border: 0;
+    background: none;
+    color: #2d2d2d;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+	font-size: 1.2em;
+	background: #fea525;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	display: block;
+	text-align: center;
+	color: #FFF !important;
+	cursor: pointer;
+}
+
+.dialog-body {
+    padding: 15px 15px 0;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.dialog-footer {
+    width: 100%;
+    padding: 0 15px 15px;
+}
+
+.dialog-footer hr {
+    margin: 15px 0;
+}
+
+.Title {
+    width: 100%;
+    margin-bottom: 1.5rem !important;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 1.75rem;
+    color: #111;
+}
+
+.BoxApp {
+    width: 100%;
+    background: #FFF;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 30px rgba(73, 78, 92, 0.15);
+}
+
+
+.ngx-datatable {
+    border: 1px solid #d1d4d7;
+    box-shadow: 0 1px 2px 0 rgba(50,50,50,.2);
+}
+
+.datatable-box-bts {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.datatable-header {
+    height: 100% !important;
+    background: #f9f9f9;
+    border-bottom: 2px solid #d1d4d7;
+}
+
+.datatable-header-cell {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    border-right: 1px solid #e8e8e8;
+    text-align: center;
+}
+
+.datatable-body-row {
+    border-top: 1px solid #d1d4d7;
+}
+
+.datatable-body-row:hover {
+    background: #d6e6fb;
+}
+
+.datatable-body-cell {
+    font-size: 12px;
+    padding: 2px 12px;
+    border-right: 1px solid #e8e8e8;
+}
+
+.datatable-row-odd {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.datatable-body-box-actions {
+    text-align: center;
+}
+
+.datatable-body-box-actions a {
+    line-height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #17c266 !important;
+    background: #111;
+    border-radius: 4px;
+    margin-right: 5px;
+    width: 25px;
+    display: inline-block;
+    text-align: center;
+}
+
+.datatable-body-box-actions a:hover {
+    color: #111 !important;
+    background: #0f8646;
+}
+
+.datatable-body-cell-label span {
+    line-height: 25px;
+}
+
+.datatable-footer {
+    background: #f9f9f9;
+    border-top: 2px solid #d1d4d7;
+    padding: 0 20p;
+}
+
+.datatable-footer-inner {
+    height: 100% !important;
+}
+
+.page-count {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+}
+
+ul.pager {
+    margin-right: 15px !important;
+}
+
+ul.pager li {
+    font-size: 13px;
+    background: #e0e0e0;
+    border-radius: 4px; 
+    line-height: 20px;
+    width: 20px;
+    text-align: center;
+    margin-right: 3px !important;
+    color: #333;
+    cursor: pointer;
+}
+
+ul.pager li a {
+    color: #333;
+    width: 20px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+ul.pager > li.active, ul.pager > li.active a {
+    background: #333 !important;
+    color: #Fff !important;
+    border-radius: 4px; 
+}
+
+ul.pager li:hover {
+    background: #8b8b8b;
+}
+
+.empty-row {
+    border-top: 1px solid #2f3646;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.input-error:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #13a456;
+    bottom: -11px;
+    right: 10px;
+}
+
+.input-error {
+    font-size: 11px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 4px 0 4px 5px;
+    padding: 4px 10px;
+    background: #13a456;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 99;
+    top: -5px;
+    right: 15px;
+}
+
+.app-tabsButons {
+    margin: 0;
+	padding: 0;
+    list-style: none;
+    margin-top: 5px;
+    border-bottom: 1px solid #373737;
+}
+
+.app-tabsButons li{
+    display: inline-block;
+    border: 1px solid #373737;
+    position: relative;
+    bottom: -1px;
+    background: #f9f9f9;
+    cursor: pointer;
+    box-shadow: 3px -2px 1px 0px rgba(50,50,50,.2);
+    padding: 5px 0;
+}
+
+.app-tabsButons li.active{
+    border-bottom: 1px solid #FFFFFF !important;
+    background: #FFF;
+}
+
+.app-tabsButons li a{
+    padding: 10px 15px;
+}
+
+.app-tabsBox {
+    border: 1px solid #373737;
+    border-top: none;
+    padding: 10px;
+    box-shadow: 0 1px 2px 0 rgba(50,50,50,.2);
+    min-height: 260px;
+    margin-bottom: 5px;
+}
+
+.app-tabsBox--in {
+    display: none;
+}
+
+.app-tabsBox--in.active {
+    display: block !important;
+    -webkit-animation: slide-down .1s ease-out;
+    -moz-animation: slide-down .1s ease-out;
+}
+
+@-webkit-keyframes slide-down {
+    0% { opacity: 0; -webkit-transform: translateX(-20%); }   
+  100% { opacity: 1; -webkit-transform: translateX(0); }
+}
+
+@-moz-keyframes slide-down {
+    0% { opacity: 0; -moz-transform: translateX(-20%); }   
+  100% { opacity: 1; -moz-transform: translateX(0); }
+}
+
+.formWrapper {
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+}
+
+div.upload {
+    height: 32px;
+    overflow: hidden;
+    position: relative;
+    background-color: #ffffff;
+    float: left;
+    width: 100%;
+}
+
+div.upload input {
+    display: block !important;
+    width: 100%;
+    height: 32px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+
+.upload user agent stylesheetdiv input[type="button"], .upload input[type="submit"], .upload input[type="reset"], .upload input[type="file"]::-webkit-file-upload-button, .upload button {
+    cursor: text !important;
+    /* Correção para Botáo Fantasma - forçar cursor:text */
+}
+
+.inputFileOverlay {
+    position: absolute;
+    width: 80%;
+    color: #696969;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 35px;
+    text-align: center;
+    font-size: 14px;
+    cursor: text;
+}
+
+.inputFileButton {
+    position: absolute;
+    width: 20%;
+    line-height: 32px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    background: #d8dbdd;
+    height: 35px;
+    margin-top: 1px;
+    right: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.formWrapper input.enviar {
+    float: left;
+    height: 34px;
+    background-color: #e0e0e0;
+    color: #000000;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    border: 0;
+    padding: 0 10px;
+    cursor: pointer;
+    width: 15%;
+}
+
+.loader-bt-save {
+    height: 35px;
+}
+
+.table-relatorio {
+    width: 100%;
+}
+
+.table-relatorio thead {
+    background: #d8d8d8;
+    text-align: center;
+    font-size: 15px;
+}
+
+.table-relatorio thead th {
+    border: 1px solid #bfbfbf;
+    padding: 2px 4px;
+    text-transform: uppercase;
+}
+
+.table-relatorio tbody td {
+    border: 1px solid #bfbfbf;
+    padding: 2px 4px;
+    font-weight: 200;
+    font-size: 13px;
+}
+
+.table-relatorio tbody tr:hover {
+    background: #e1e1e1;
+}
+
+.col-center {
+    text-align: center;
+}
+
+.col-right {
+    text-align: right;
+}
+
+.botao-icon {
+    padding-left: 40px;
+    position: relative;
+}
+
+.botao-icon i {
+    left: 10px;
+    position: absolute;
+    font-size: 20px;
+}
+
+.actions-relatorio {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.logo-relatorio {
+    margin-bottom: 30px;
+}
+
+.title-relatorio {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 65px;
+    margin: 0;
+}
+
+.label-filtro-relatorio {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+.text-filtro-relatorio {
+    font-size: 20px;
+    margin: 0;
+    text-align: right;
+}
+
+.box-impressao {
+    padding: 80px 60px;
+}
+
+.box-impressao .table-relatorio{
+    border: 1px solid #000000;
+}
+
+.box-impressao .table-relatorio thead{
+    font-size: 18px;
+}
+
+.box-impressao .table-relatorio tbody{
+    font-size: 17px;
+}
+
+.box-impressao .table-relatorio thead th {
+    border: 1px solid #000000;
+}
+
+.box-impressao .table-relatorio tbody td {
+    border: 1px solid #000000;
+}

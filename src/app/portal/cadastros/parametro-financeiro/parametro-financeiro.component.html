@@ -1,0 +1,262 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+	<section class="Title">
+		Cadastro >> Parâmetro Financeiro
+	</section>
+
+	<section class="BoxApp">
+		<form id="form-search-clientes" [formGroup]="formSearch">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Descrição Parâmetro Financeiro</label>
+						<input class="form-control" id="nomeSearch" type="text" placeholder="Descrição Parâmetro Financeiro..." [formControl]="formSearch.controls.descricao">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Status</label>
+						<select id="status" [formControl]="formSearch.controls.status">
+							<option value="ATIVO" selected>ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Início</label>
+						<input class="form-control" id="nomeSearch" type="text">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Fim</label>
+						<input class="form-control" id="nomeSearch" type="text">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button (click)="showModalCadastro = !showModalCadastro" class="botao">Novo</button>
+				</div>
+				<div class="col-md-6">
+					<div class="app-boxBotoes--direita">
+						<button class="botao cinza" (click)="limparForm()">Limpar</button>
+						<input class="botao" type="submit" (click)="pesquisarParametros(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	
+	<section class="BoxApp">
+		<ngx-datatable #myTable
+			class="bootstrap"
+			[rows]="listParametro"
+			[columnMode]="'force'"
+			[headerHeight]="50"
+			[footerHeight]="50"
+			[rowHeight]="'auto'"
+			[messages]="{emptyMessage: 'Sem dados...'}"
+			[limit]="15">
+
+			<ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" name="Ações">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					<div class="datatable-body-box-actions" *ngIf="row.status == 'ATIVO'">
+						<a class="home-icon" (click)="editarParametro(row)" title="Editar">
+							<i class="fa fa-edit"></i>
+						</a>
+						<a class="home-icon" (click)="inativarParametro(row)" title="Inativar">
+							<i class="fas fa-times"></i>
+						</a>
+					</div>
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+			<!-- <ngx-datatable-column name="Descricao" prop="descricao"></ngx-datatable-column> -->
+			<ngx-datatable-column name="Usina" prop="usinaNome"></ngx-datatable-column>
+			<ngx-datatable-column name="Prazo" prop="prazo"></ngx-datatable-column>
+			<ngx-datatable-column name="Status" prop="status"></ngx-datatable-column>
+			<ngx-datatable-column name="Data Cadastro" prop="dataCadastro">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataCadastro) }} 
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Data Alteração" prop="dataUltimaAtualizacao">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataUltimaAtualizacao) }} 
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-footer>
+				<ng-template 
+				ngx-datatable-footer-template 
+				let-rowCount="rowCount"
+				let-pageSize="pageSize"
+				let-selectedCount="selectedCount"
+				let-curPage="curPage"
+				let-offset="offset">
+				<div>
+					<div class="page-count">
+					Total de Registros: {{rowCount}}
+					</div>
+				</div>
+				<datatable-pager
+						[pagerLeftArrowIcon]="'fa fa-angle-double-left'"
+						[pagerRightArrowIcon]="'fa fa-angle-double-right '"
+						[pagerPreviousIcon]="'fa fa-angle-left'"
+						[pagerNextIcon]="'fa fa-angle-right '"
+						[page]="curPage"
+						[size]="pageSize"
+						[count]="rowCount"
+						[hidden]="!((rowCount / pageSize) > 1)"
+						(change)="table.onFooterPage($event)">
+					</datatable-pager>
+				</ng-template>
+			</ngx-datatable-footer>
+
+		</ngx-datatable>
+	</section>
+
+</div>
+
+
+<app-dialog [(visible)]="showModalCadastro">
+
+	<div class="dialog-header">
+		Cadastro de Parâmetro Financeiro
+		<a (click)="fecharModal()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<form id="form-save-oem" [formGroup]="formSave">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Usina</label>
+						<select #t [formControl]="formSave.controls.usinaId">
+							<option *ngFor="let usina of listUsinas; let i = index" [value]="usina.id">{{ usina.nome }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSave.get('usinaId').touched && formSave.get('usinaId').hasError('required')">
+							Usina é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">CDI</label>
+						<input currencyMask class="form-control" formControlName="cdi" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 1 }"/>
+						<div class="input-error" *ngIf="formSave.get('cdi').touched && formSave.get('cdi').hasError('required')">
+							CDI é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Correção CDI %</label>
+						<input currencyMask class="form-control" formControlName="correcaoCdi" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+						<div class="input-error" *ngIf="formSave.get('correcaoCdi').touched && formSave.get('correcaoCdi').hasError('required')">
+							Correção CDI é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Correção Financeira AM %</label>
+						<input currencyMask class="form-control" formControlName="correcaoAm" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 9 }"/>
+						<div class="input-error" *ngIf="formSave.get('correcaoAm').touched && formSave.get('correcaoAm').hasError('required')">
+							Correção AM é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Correção Tarifa %</label>
+						<input currencyMask class="form-control" formControlName="correcaoTarifa" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+						<div class="input-error" *ngIf="formSave.get('correcaoTarifa').touched && formSave.get('correcaoTarifa').hasError('required')">
+							Correção Tarifa é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Correção Carência %</label>
+						<input currencyMask class="form-control" formControlName="correcaoCarencia" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('correcaoCarencia').touched && formSave.get('correcaoCarencia').hasError('required')">
+							Correção Carência é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Prazo Meses Carência</label>
+						<input currencyMask class="form-control" formControlName="prazo" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+						<div class="input-error" *ngIf="formSave.get('prazo').touched && formSave.get('prazo').hasError('required')">
+							Prazo é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Tabela Financeira Meses</label>
+						<input currencyMask class="form-control" formControlName="qtdMesesSimulacaoPrice" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+						<div class="input-error" *ngIf="formSave.get('qtdMesesSimulacaoPrice').touched && formSave.get('qtdMesesSimulacaoPrice').hasError('required')">
+							Meses Sim Price é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao cinza" (click)="fecharModal()">Cancelar</button>
+					<input class="botao" type="submit" (click)="sendForm(formSave.value)" id="salvar-user" value="Salvar">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+<app-dialog [(visible)]="showModalDesativar">
+
+	<div class="dialog-header">
+		Deseja desativar o Parametro "{{ objDesativar.descricao }}"?
+		<a (click)="fecharModalDesativar()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="fecharModalDesativar()">Cancelar</button>
+					<input class="botao cinza" type="submit" (click)="sendDesativar()" id="salvar-oport" value="Desativar">
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</app-dialog>	

@@ -1,0 +1,1776 @@
+html, body {
+    font-family: 'Open Sans', 'Source Sans Pro' !important;
+}
+
+.block-menu{
+    width:100%;
+    height:100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+}
+
+.flag-chart canvas, .modality-chart canvas, .daily-chart canvas{
+    height:400px !important;
+    max-height: 550px;
+}
+
+.frm .form-control {
+    font-weight: normal !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 15px;
+    border: 1px solid #ccc !important;
+    margin-bottom:5px;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size: .90em;
+}
+
+.frm .form-control:focus {
+    /*background: #656565;*/
+    /*color: #fff;*/
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+button[disabled]{
+    border: 0 !important;
+}
+
+/*CONTROLE DE CAMPOS SELECT -- NGSELECT*/
+.ui-select-match, .ui-select-container{
+    outline: none !important;
+}
+
+.select{
+    width:100%;
+    font-size:0.90em !important;
+}
+
+.select span{
+    line-height: 33px !important;
+}
+
+.select li{
+    font-size: 0.82em !important;
+}
+
+.ui-select-match{
+    overflow: hidden;
+}
+
+
+/*CLASSE GENÉRICA PARA ALTERAÇÃO DO MODAL RETORNANDO COMPONENTE PRONTO*/
+.modalcomponente .modal-body{
+    padding: 0 !important;
+}
+
+.modalcomponente .modal-body h1{
+    background: #ff6300 !important;
+    border: none !important;
+}
+
+.modalcomponente .modal-body .padding5{
+    padding:5px 10px !important;
+}
+
+/*PAINEL*/
+.bl-agilli {
+    width: 100% !important;
+    margin: 0 0 !important;
+}
+
+.alert {
+    background: rgba(224, 7, 10, 0.59) !important;
+    color: #fff !important;
+    padding: 10px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    width:100%;
+    float: left;
+    text-align: center;
+    border:none !important;
+}
+
+.padding5 {
+    padding: 5px 5px;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.modal {
+    left: 65px;
+}
+
+.simple-notification-wrapper{
+    width:70% !important;
+    max-width:300px !important;
+    margin-left:55px;
+}
+
+.bg-painel {
+    background: #eee;
+}
+
+.conteudo {
+    float: left;
+    width: 100%;
+}
+
+/* TOPO */
+.conteudo .h-panel {
+    background: url(../images/bg-topo-panel.png) left top;
+    -webkit-background-size: cover;
+    background-size: cover;
+    /*height: 130px;*/
+    float: left;
+    z-index: 999;
+    width: 100%;
+    position: fixed;
+    padding: 5px 5px 5px 70px;
+}
+
+.conteudo .h-panel .logo-panel {
+    float: left;
+    padding: 5px 15px 5px 0;
+    margin: 5px 0;
+    max-height: 130px;
+    background: url(../images/logo-panel.png) no-repeat center center;
+    width: 100%;
+    max-width: 134px;
+    height: 65px;
+}
+
+/*ANTECIPAÇÃO HEADER*/
+.at-header {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+}
+
+.at-dados {
+    text-align: center;
+    padding:5px;
+    color: #fff;
+    font-size:1.2em;
+}
+
+.at-dados .antecipe-ja a{
+    text-align: center;
+    text-transform: uppercase;
+    width:100%;
+    font-size:1.5em;
+    animation: bt-antecipacao 1s infinite linear;
+    cursor: pointer;
+    color: yellow;
+}
+
+/*DADOS DO USUARIO*/
+.dados-usuario {
+    color: #fff;
+    float: right;
+    text-align: center;
+    position: relative;
+    padding:0 0 0 10px ;
+    margin-right: 2%;
+}
+
+.dados-usuario em{
+    display: none;
+}
+
+.dados-usuario .dados-user {
+    float: left;
+}
+
+.dados-user-m{
+    float: left;
+    width:90%;
+    margin:0 5% 10px 5%;
+    text-align: center !important;
+}
+
+.dados-user-m span{
+    clear: both;
+    float: left;
+    text-align: center;
+    width: 100%;
+    font-size: .95em !important;
+}
+
+.dados-usuario .dados-user span{
+    clear: both;
+    float: left;
+    text-align: right;
+    width: 100%;
+    font-size: .95em !important;
+}
+
+/*MENU LATERAL - PADRAO*/
+.ic-menu{
+    float: left;
+    padding:26px 0;
+    text-align: center;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    /*width:120px;*/
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.ic-menu em{
+    font-size: 2.0em;
+}
+
+.menu-l {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width:62px;
+    z-index: 9999999;
+    position: fixed;
+}
+
+.menu-l ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+.menu-l ul li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0 2px 0;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    float: left;
+    overflow: hidden;
+    height: 50px;
+}
+
+.menu-l ul li em {
+    font-size: 2.0em;
+    margin-top: 1px;
+}
+
+/*MENU ATIVADO */
+.menu-l span {
+    display: none;
+}
+
+/*MENU COM TOOGLE ATIVADO*/
+.tog-menu {
+    max-width: 200px;
+}
+
+.tog-menu ul li {
+    padding: 10px 10px !important;
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    overflow: hidden;
+    height: 50px;
+}
+
+.ic-menu .material-icons {
+    -moz-transform: scale(1) rotate(180deg);
+    -webkit-transform: scale(1) rotate(180deg);
+    -o-transform: scale(1) rotate(180deg);
+    -ms-transform: scale(1) rotate(180deg);
+    transform: scale(1) rotate(180deg);
+}
+
+.tog-menu ul li em{
+    width: 50px;
+    float: left;
+}
+
+.tog-menu span {
+    display: inline-block !important;
+    text-transform: uppercase;
+    float: left;
+    overflow: hidden;
+}
+
+/*----  RESPONSAVEL PELO CONTAINER DAS PAGES*/
+.bl-conteudo {
+    /*margin-left:62px;*/
+    padding-left: 62px;
+    padding-top: 85px;
+    float: left;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+}
+
+/*SUB MENU PAGES*/
+.subm-p {
+    float: left;
+    width: 15%;
+    position: fixed;
+    height: 100%;
+    border-right:1px solid #EFEFEF;
+}
+
+.subm-p nav {
+    width: 100%;
+    float: left;
+    overflow-y: auto;
+    height: 580px;
+}
+
+.subm-p nav ul {
+    text-decoration: none;
+    list-style: none;
+    padding: 5px 0 5px 0;
+    width: 100%;
+    float: left;
+}
+
+.subm-p nav ul a {
+    text-decoration: none;
+    color: #878787;
+    width: 100%;
+    float: left;
+}
+
+.subm-p nav .active{
+    color: #17BAC6;
+    background: url(../images/bg-submenu.png) right center no-repeat;
+}
+
+.subm-p nav ul li {
+    padding: 20px 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    border-bottom: 1px solid #bdbdbd;
+    text-align: center;
+    border-left: 5px solid #bdbdbd;
+    border-left-width: 10px;
+    font-size: 1.1em;
+}
+
+.subm-p nav ul li em {
+    padding: 5px 0;
+}
+
+.subm-p nav ul li em {
+    width: 100%;
+    font-size: 2em;
+    display: block;
+}
+
+.subm-p nav ul li span {
+    text-transform: capitalize;
+    width: 50%;
+}
+
+/*BLOCOS DE CONTEUDO*/
+.conteudo-page-bl {
+    width: 84.3%;
+    float: right;
+    height: 100%;
+    padding: 0 0;
+    position: relative;
+}
+
+.header-bl {
+    text-transform: capitalize;
+    font-size: 2.0em;
+    padding: 20px 5px;
+}
+
+.header-bl h3 {
+    float: left;
+    font-size: 1.0em;
+}
+
+.header-bl em {
+    font-size: 2.0em !important;
+    float: left;
+}
+
+/*CONTROLE DE CSS DOS BLOCOS VIA ID DA DIV*/
+.shadow-bl {
+    /*shadow*/
+    -webkit-box-shadow: 0 0 15px 0 rgba(95, 95, 95, 0.8);
+    -moz-box-shadow: 0 0 15px 0 rgba(95, 95, 95, 0.8);
+    box-shadow: 0 0 15px 0 rgba(95, 95, 95, 0.8);
+}
+
+.header-func {
+    width: 100%;
+    color: #fff;
+}
+
+.header-func h1 {
+    font-size: 2.0em;
+    text-transform: uppercase;
+    padding: 15px;
+    background: #1b6d85;
+    border-bottom: 5px solid #00b3ee;
+    margin: 0 0 0 0;
+}
+
+.header-func h1 span {
+    margin-left: 5px;
+}
+
+.header-func h4 {
+    width: 100%;
+    background: #f5f4ee;
+    color: #1b6d85;
+    padding: 10px 5px;
+    margin: 0;
+    font-size: 1em;
+}
+
+.bt {
+    display: inline-block;
+}
+
+.bt button {
+    background: #1b6d85;
+    border: 0;
+    padding: 10px 5px;
+    color: #fff;
+    margin: 5px 1px;
+    font-size: .85em;
+    line-height: 20px;
+}
+
+.bt em {
+    font-size: 1.1em;
+    line-height:20px;
+}
+
+.bt .ileft {
+    float: left;
+    margin-right: 3px;
+}
+
+.bt .iright {
+    float: right;
+    margin-left: 3px;
+}
+
+.btn-active {
+    background: #00b3ee !important;
+}
+
+/*TELA DE RESUMO*/
+#resumo-bl {
+    float: left;
+    width: 50%;
+}
+
+#banner-resumo {
+    width: 50%;
+    background: #172762;
+    float: left;
+    overflow: hidden;
+    height: 470px;
+    max-height: 470px;
+    position: relative;
+}
+
+.img-1 {
+    -webkit-background-size:cover !important;
+    background-size:cover !important;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 555;
+}
+
+.img-1 .dados-antecipa {
+    color: #fff;
+    padding: 50px 3px;
+}
+
+.img-1 .dados-antecipa .vl-antecipa {
+    color: #fff;
+    font-size: 1.8em;
+    padding: 0 15px;
+    line-height: 50px;
+}
+
+.img-1 .dados-antecipa .vl-antecipa span {
+    clear: both;
+    width: 100%;
+    display: block;
+}
+
+.img-1 .dados-antecipa .vl-antecipa .vlr-antecipacao {
+    font-size: 2.2em;
+    font-weight: bold;
+    text-shadow: 2px 2px #000;
+}
+
+.vl-antecipa-bt a {
+    background: #1d293b;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    float: left;
+    font-size: 2.0em;
+    color: #38cef1;
+    margin-top: 10px;
+}
+
+#resumo-table {
+    width: 50%;
+    float: left;
+    border: none;
+    margin-bottom: 2px;
+}
+
+.table > thead > tr > th {
+    background: #1b6d85;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    border: none !important;
+}
+
+.table thead th {
+    text-align: center;
+}
+
+.table > tbody > tr {
+    border-bottom: 1px dashed #ccc;
+}
+
+.table > tbody > tr > td {
+    text-align: center;
+    border: none !important;
+}
+
+.bt-grafico {
+    width: 100%;
+    text-align: center;
+}
+
+.bt-grafico button{
+    width:49.0% !important;
+    margin: 2px 1px;
+}
+
+.ng2-pagination .current {
+    background: #00b3ee !important;
+    padding: 0.5rem 0.9rem !important;
+}
+
+.ng2-pagination li {
+    cursor: pointer;
+}
+
+.ng2-pagination .disabled {
+    color: #fff !important;
+    display: none;
+}
+
+.pagination {
+    margin: 5px 0 !important;
+}
+
+.pagination > li > a {
+    border: none !important;
+}
+
+/*ANTECIPAÇÃO AUTOMATICA*/
+#antecipacacao-automatica {
+    background: #fff;
+    padding: 5px;
+    float: left;
+    width: 100%;
+}
+
+#antecipacacao-automatica label {
+    font-weight: normal;
+    font-size: .85em !important;
+}
+
+#antecipacacao-automatica h5 {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 5px;
+    background: #1b6d85;
+    color: #fff;
+    font-family: "OpenB", 'Open Sans', 'Source Sans Pro';
+    font-weight: bold;
+}
+
+#antecipacacao-automatica .form-control {
+    font-weight: normal !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 15px;
+    border: 1px solid #ccc !important;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size: .90em;
+}
+
+#antecipacacao-automatica .form-control:focus {
+    /*background: #656565;*/
+    /*color: #fff;*/
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+#antecipacacao-automatica .form-group {
+    float: left;
+}
+
+.auto-prepayment-info span {
+    font-family: "OpenB", "Open Sans", 'Source Sans Pro';
+    font-weight: bold;
+    color: #1b6d85;
+}
+
+.msg-block-antecipa1 {
+    padding: 5px;
+    background: #fff;
+    width: 90%;
+    margin: 5px 5% 0 5%;
+    /*shadow*/
+    -webkit-box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.5);
+    -moz-box-shadow: 0 0 15px 0 rgba(95, 95, 95, 0.5);
+    box-shadow: 0 0 15px 0 rgba(95, 95, 95, 0.5);
+}
+
+.month-days .form-group{
+    width:15% !important;
+}
+
+/*ANTECIPAÇÃO*/
+#default-prepayment .botao {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.msg-block-antecipa2 {
+    padding: 5px;
+    background: #fff;
+    width: 90%;
+    margin: 5px 5% 0 5%;
+}
+
+.custom-prepayment h5 {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 5px;
+    background: #1b6d85;
+    color: #fff;
+    font-family: "OpenB", 'Open Sans', 'Source Sans Pro';
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.custom-prepayment .form-control {
+    font-weight: normal !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    border-radius: 2px !important;
+    padding: 0 15px;
+    border: 1px solid #ccc !important;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size: .90em;
+}
+
+.custom-prepayment .form-control:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.custom-prepayment .form-group {
+    float: left;
+    width: 100%;
+}
+
+.custom-prepayment label {
+    font-weight: normal;
+    font-size: .85em !important;
+}
+
+/*ARQUIVOS DE CONCILIAÇÃO*/
+.filesreconciliation label {
+    font-weight: normal;
+    font-size: .85em !important;
+}
+
+.ui-select-match-text{
+    line-height: 30px !important;
+}
+
+.filesreconciliation h5 {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 5px;
+    background: #1b6d85;
+    color: #fff;
+    font-family: "OpenB", 'Open Sans', 'Source Sans Pro';
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.filesreconciliation .form-control {
+    font-weight: normal !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    border-radius: 2px !important;
+    padding: 0 15px;
+    border: 1px solid #ccc !important;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size: .90em;
+}
+
+.filesreconciliation .form-control:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+/*VALOR MINIMO*/
+.vl-min h5 {
+    margin-bottom: 0;
+}
+
+.vl-min .form-group label {
+    width: 100%;
+}
+
+.tipo-venda .form-group span {
+    margin-top: -5px;
+}
+
+.bandeiras .form-group {
+    width: 33.33%;
+}
+
+/*.bandeiras label{*/
+    /*margin-bottom: 0;*/
+/*}*/
+
+.tipo-venda .form-group {
+    width: 33.33%;
+}
+
+.bloco-valores {
+    width: 50%;
+    float: left;
+}
+
+.p-recebimento {
+    float: left;
+    width: 50%;
+}
+
+.p-recebimento .form-group {
+    width: 50%;
+}
+
+.tipo-venda {
+    clear: both;
+}
+
+.bloco {
+    float: left;
+    text-align: center;
+    background: #0D3349;
+    width: 49%;
+    margin: 0 0.5%;
+    font-family: "Open Sans", "Source Sans Pro";
+    text-transform: uppercase;
+    height: 145px;
+    border-bottom: 5px solid #ff6300;
+}
+
+.bloco span {
+    width: 100%;
+    display: block;
+    color: #fff;
+    font-size: 1.8em;
+    padding: 6px 0;
+}
+
+.bloco .chamativo {
+    font-weight: bold;
+    font-family: "Open Sans", "Source Sans Pro";
+    font-size: 2.4em;
+    color: yellow;
+}
+
+/*LIST FILES - CSS*/
+.conciliationFilesB .table a {
+    color: #00b3ee;
+}
+
+.conciliationFilesB .table > tbody > tr {
+    margin: 2px;
+    background: #f9f9f9;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+    border-color: rgba(255, 255, 255, 1);
+    color: #1b6d85;
+}
+
+/*CONTRATOS E TARIFAS*/
+.contracts-t {
+    text-align: center;
+    width: 12%;
+    height: 130px;
+    margin: 0 0 5px 0.5%;
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    float: left;
+    border-bottom: 5px solid #00b3ee;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    position: relative;
+}
+
+.contracts-t:focus {
+    text-decoration: none;
+    border-color: #ff6300;
+    color: #fff !important;
+}
+
+.contracts-t em {
+    font-size: 3.0em;
+    width: 100%;
+    display: block;
+}
+
+.efeito-hover em {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contracts-t .d-contracts {
+    width: 100%;
+    display: block;
+    padding: 25px 0;
+    float: left;
+}
+
+/*INCLUSÃO DE FILIAL*/
+#filial .form-control {
+    font-weight: normal !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 15px;
+    border: 1px solid #ccc !important;
+    margin-bottom:5px;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size: .90em;
+}
+
+#filial .form-control:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.form-contact, .form-der, .franguinho{
+    width:33%;
+    float: left;
+}
+
+.cnpj-filial{
+    width:40%;
+    float: left;
+}
+
+.dif-fiscal{
+    font-size:.9em !important;
+    width:60%;
+    float: left;
+    margin-top: 25px;
+}
+
+.tef-form .form-group{
+    width:33%;
+    padding:0 1px;
+    float: left;
+    font-size:.85em;
+}
+
+/*FALE CONOSCO*/
+.faleconosco .form-group textarea{
+    display: block;
+    height:75px;
+}
+
+.faleconosco .quadro1,.faleconosco .quadro2{
+    width:50%;
+}
+
+/*CONTATOS*/
+#squareone, #squaretwo{
+    width:49.8%;
+    min-height:182px;
+}
+
+#squaretwo{
+    margin-left:2px;
+}
+
+#squareone span, #squaretwo span{
+    float: left;
+    width:100%;
+    display: block;
+    line-height:30px;
+}
+
+/* DADOS CADASTRAIS*/
+#d-cadastrados{
+    width:100%;
+    float: left;
+}
+
+#d-cadastrados .form-group{
+    width:50%;
+    float: left;
+    padding:0 2px;
+}
+
+/* DADOS BANCÁRIOS */
+#bankAccount{
+    float: left;
+    width:100%;
+}
+
+#bankAccount form{
+    float: left;
+    width:100%;
+}
+
+#bankAccount .dataBank:nth-child(n+5){
+    border-top:1px dashed #ccc;
+}
+
+#bankAccount .dataBank:nth-child(4n+1){
+    border-left: none;
+}
+
+#bankAccount .dataBank{
+    float: left;
+    width: 25%;
+    padding:5px;
+    border-left:1px dashed #ccc;
+}
+
+#bankAccount .dataBank label{
+    text-transform: capitalize;
+}
+
+#bankAccount .dataBank input{
+    text-align: center;
+}
+
+#bankAccount .dataBank .button{
+    float: right;
+}
+
+/*.fixoBank:before{*/
+    /*content: "Conta Fixa";*/
+    /*float: left;*/
+    /*width:100%;*/
+    /*background: #0D3349;*/
+    /*padding:5px;*/
+    /*text-align: center;*/
+    /*color:#fff;*/
+/*}*/
+
+.fixoBank{
+    background: #eeeeee;
+}
+
+
+.fixoBank .form-group{}
+
+
+/* DESCONTO DO CLIENTE */
+.customerDiscount .paymentMethodsSelect > div{
+    float: left;
+    padding:2px 10px;
+}
+
+/* PREÇO POR PRODUTO */
+.pr-prod .produto{
+    width: 33.33%;
+    float: left;
+    padding:5px;
+}
+
+.pr-prod .produto .input-group-addon{
+    font-weight:600 !important;
+}
+
+.pr-prod label{
+    text-transform: uppercase;
+}
+
+/* SERVIÇOS PRESTADOS - REFEIÇÃO/ALIMENTAÇÃO */
+.rf-al > div{
+    padding:5px;
+}
+
+.rf-al .form-group{
+    margin-bottom: 7px !important;
+}
+
+.rf-al .d-alimentacao, .rf-al .bl-block{
+    min-height: 219px;
+}
+
+.rf-al .d-alimentacao, .rf-al .bl-block{
+    float: left;
+    width:50%;
+}
+
+/* SERVIÇOS PRESTADOS - ABASTECIMENTO */
+.supply > div{
+    padding:5px;
+}
+
+.supply .form-group{
+    margin-bottom: 7px !important;
+}
+
+.supply .bl-block{
+    min-height: 219px;
+}
+
+.supply .bl-block, .supply .bl-block-1{
+    float: left;
+    width:50%;
+}
+
+.supply .t-combustivel .form-group{
+    float: left;
+    width: 50%;
+}
+
+.supply .t-lavajato .form-group{
+    float: left;
+    width: 50%;
+}
+
+/* SERVIÇOS PRESTADOS - MANUTENÇÃO */
+.maintenance > div{
+    padding:5px;
+}
+
+.maintenance .form-group{
+    margin-bottom: 4px !important;
+}
+
+.maintenance .bl-block, .maintenance .bl-block-1{
+    float: left;
+    width:50%;
+}
+
+.maintenance .t-lavajato .form-group{
+    float: left;
+    width: 50%;
+}
+
+/*BLOCO 2*/
+.maintenance .maintenance-t .form-group{
+    float: left;
+    width:50%;
+}
+
+.maintenance .marcas-atendimento-t{
+    border:1px dashed #ccc;
+    float: left;
+    width:100%;
+    padding:5px;
+    margin-bottom:5px;
+}
+
+.maintenance .marcas-atendimento > label{
+    float: left;
+    width:50%;
+}
+
+.maintenance .marcas-atendimento .bt-multimarcas{
+    float: left;
+    width:50%;
+    font-weight:bold;
+}
+
+.maintenance .marcas-atendimento .form-group{
+    float: left;
+    width:50%;
+}
+
+.maintenance .marcas-atendimento .form-group span{
+    text-transform: uppercase;
+}
+
+.maintenance .modos-of{
+    float: left;
+    width:100%;
+}
+
+.maintenance .modos-of .form-group{
+    float: left;
+    width:50%;
+}
+
+.maintenance .tipo-mecanica-g .tipo-mecanica .form-group{
+    float: left;
+    width:33.33%;
+}
+
+.maintenance .reparos-g .tipo-mecanica span{
+    text-transform: uppercase;
+}
+
+/** SLIDE **/
+
+.item{
+    height:470px;
+}
+
+.carousel img{
+    max-width: inherit !important;
+}
+
+.carousel{
+    position: static !important;
+    height:100%;
+}
+
+.carousel-inner{
+    height: 100%;
+}
+
+.carousel-fade .carousel-inner .item {
+    opacity: 0;
+    transition-property: opacity;
+    overflow:hidden;
+}
+
+.carousel-inner>.item>img{
+    height:100% !important;
+}
+
+.item.active img {
+    transition: transform 5000ms linear 0s;
+    /* This should be based on your carousel setting. For bs, it should be 5second*/
+    transform: scale(1.05, 1.05);
+}
+.carousel-fade .carousel-inner .active {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+    z-index: 2;
+}
+
+/*
+WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
+now override the 3.3 new styles for modern browsers & apply opacity
+*/
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+
+
+
+/*------ BREAKPOINTS -------*/
+/* TELAS FULL HD+ Minimo 1400px Width*/
+@media (min-width: 1001px){
+    /*CONTROLE DE HOVER*/
+    /*ANTECIPAÇÃO HEADER*/
+    .at-dados .antecipe-ja a:hover {
+        text-decoration: none;
+    }
+
+    /* MENU LATERAL */
+    .menu-l ul li:hover {
+        background: rgba(0, 0, 0, 0.3);
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+
+    /* SUBMENU */
+    .subm-p nav ul a:hover {
+        color: #17BAC6;
+        background: url(../images/bg-submenu.png) right center no-repeat;
+    }
+
+    /* BOTOES */
+    .bt button:hover {
+        background: #0D3349;
+    }
+
+    .bt-dias button:hover {
+        background: #0D3349 !important;
+    }
+
+    /* TELA DE RESUMO */
+    .vl-antecipa-bt a:hover {
+        background: #00b3ee;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* PAGINAÇÃO */
+    .ng2-pagination a:hover, .ng2-pagination button:hover {
+        background: #1b6d85 !important;
+        color: #fff;
+        text-decoration: none;
+        padding: 0.5rem 0.9rem !important;
+    }
+
+    /* CONTRATOS E TARIFAS */
+    .contracts-t:hover {
+        text-decoration: none;
+        border-color: #ff6300;
+        background: #1b6d85;
+        color: #fff;
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+
+    .contracts-t .efeito-hover, .contracts-t:hover .efeito-hover em {
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        color: rgba(0, 0, 0, 0);
+        background: rgba(0, 0, 0, 0);
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+
+    .contracts-t:hover .efeito-hover, .contracts-t:hover .efeito-hover em {
+        visibility: visible;
+        color: rgba(255, 255, 255, 1);
+        background: rgba(0, 0, 0, 0.5);
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+}
+
+@media (min-width: 1370px){
+    .subm-p nav {
+        width: 100%;
+        float: left;
+        overflow-y: hidden;
+        height: 100%;
+    }
+}
+
+/*--- MAXIMO 1000px Width*/
+@media (max-width: 1000px) {
+    .contracts-t{
+        font-size:0.95em;
+    }
+    .efeito-hover em{
+        display: none;
+    }
+    /*SUBMENU*/
+    .subm-p {
+        width: 100%;
+        position: relative;
+    }
+
+    .subm-p nav{
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .tooltip{
+        display: none !important;
+    }
+
+    .subm-p nav ul li {
+        padding: 0 0;
+        margin-bottom: 0;
+    }
+
+    .conteudo-page-bl {
+        clear: both;
+        width: 100%;
+    }
+
+    .bl-conteudo {
+        padding-left: 62px;
+        padding-top: 0;
+        position: relative;
+        height: 100%;
+    }
+
+    .conteudo .h-panel {
+        background: url(../images/bg-topo-panel.png) left top;
+        -webkit-background-size: cover;
+        background-size: cover;
+        z-index: 999;
+        width: 100%;
+        position: relative;
+    }
+
+    .dados-acesso {
+        width: 100%;
+    }
+
+    /*TELA DE RESUMO*/
+    #resumo{
+        float: left;
+        width:100%;
+    }
+
+    #resumo-bl {
+        width: 100%;
+    }
+
+    #banner-resumo {
+        clear: both;
+        width: 100%;
+        height: 400px;
+    }
+
+    #banner-resumo .img-1 {
+        background: none;
+        text-align: center;
+    }
+
+    #banner-resumo .vl-antecipa-bt {
+        display: flex;
+        justify-content: center;
+    }
+
+    /*ANTECIPAÇÃO AUTOMATICA*/
+    .bandeiras .form-group {
+        width: 50%;
+    }
+
+    .month-days .form-group{
+        width:10% !important;
+    }
+}
+/*---- MAXIMO 787px Width */
+@media (max-width: 787px){
+    .header-func h1{
+        font-size: 1.2em;
+    }
+    /*AJUTES DOS ITENS MATERIAIS DE COMUNICAÇÃO - CONTRATOS E OPERAÇÃO*/
+    .contracts-t {
+        padding: 0 0;
+        text-align: center;
+        width: 19.5%;
+        font-size:0.95em;
+    }
+
+    /*CONTATOS*/
+    #squareone, #squaretwo{
+        width:100%;
+    }
+
+    #squaretwo{
+        clear: both;
+    }
+
+    #squareone main{
+        font-size:1.1em !important;
+    }
+
+    .faleconosco .quadro1, .faleconosco .quadro2{
+        width:100%;
+    }
+
+    .dados-usuario{
+        position: relative;
+    }
+
+    .dados-usuario em{
+        display: block;
+        font-size:5.0em;
+        cursor: pointer;
+    }
+
+    .dados-user{
+        display: none;
+    }
+
+    /*DADOS BANCARIOS*/
+    #bankAccount .dataBank{
+        width:33.33%;
+    }
+
+    #bankAccount .dataBank:nth-child(n+4){
+        border-top:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(4n+1){
+        border-left:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(3n+1){
+        border-left:none;
+    }
+
+    /* PREÇO POR PRODUTO */
+    .pr-prod .produto{
+        width:50%;
+    }
+}
+
+/*--- MAXIMO 695px Width*/
+@media (max-width: 695px) {
+    .contracts-t {
+        padding: 0 0;
+        text-align: center;
+        width: 32.7%;
+    }
+    .at-header{
+        clear: both;
+    }
+
+    .dados-usuario {
+        text-align: center;
+        max-width:70px;
+    }
+
+    .dados-usuario .dados-user span {
+        text-align: center;
+    }
+
+    /*ANTECIPAÇÃO AUTOMATICA*/
+    .bandeiras .form-group {
+        width: 100%;
+    }
+
+    .p-recebimento .form-group {
+        width: 100%;
+    }
+
+    .bloco-valores {
+        width: 100%;
+        float: left;
+    }
+
+    .p-recebimento {
+        clear: both;
+        float: left;
+        width: 100%;
+    }
+
+    .month-days .form-group{
+        width:20% !important;
+    }
+
+    /*ANTECIPAÇÃO*/
+    .bloco {
+        clear: both;
+        width: 100%;
+        margin-bottom: 5px;
+        height: auto;
+    }
+
+    .botoes-antecipacao button {
+        width: 100%;
+    }
+
+    .botoes-antecipacao button[disabled] {
+        background: #3c3c3c;
+    }
+
+    .msg-block-antecipa2 {
+        width: 96%;
+        margin: 0 2% 0 2% !important;
+    }
+
+    /*INCLUSÃO DE FILIAL*/
+
+    .form-contact, .form-der, .franguinho{
+        width:100%;
+    }
+
+    .tef-form .form-group{
+        width:100%;
+    }
+
+    .cnpj-filial{
+        width:100%;
+    }
+
+    .dif-fiscal{
+        width:100%;
+        font-size:.7em;
+        margin-top: 0;
+    }
+
+    .bt-grafico button{
+        width:100% !important;
+    }
+    /*DADOS CADASTRAIS FORMS */
+    #d-cadastrados .form-group{
+        width:100%;
+        float: left;
+        padding:0 2px;
+    }
+    /* SERVIÇOS PRESTADOS - ABASTECIMENTO */
+    .supply .bl-block, .supply .bl-block-1{
+        float: left;
+        width:100%;
+        min-height: inherit;
+    }
+
+    .supply .t-combustivel .form-group{
+        float: left;
+        width: 50%;
+    }
+
+    .supply .t-lavajato .form-group{
+        float: left;
+        width: 50%;
+    }
+
+    /* SERVIÇOS PRESTADOS -ABASTECIMENTO */
+    .maintenance .bl-block, .maintenance .bl-block-1{
+        float: left;
+        width:100%;
+    }
+
+    .maintenance .marcas-atendimento .form-group{
+        float: left;
+        width:100%;
+    }
+
+    .maintenance .marcas-atendimento .form-group span{
+        text-transform: uppercase;
+    }
+
+    .maintenance .modos-of{
+        float: left;
+        width:100%;
+    }
+
+    .maintenance .maintenance-t .form-group{
+        width:100%;
+    }
+
+    .maintenance .modos-of .form-group{
+        float: left;
+        width:100%;
+    }
+
+    .maintenance .tipo-mecanica-g .tipo-mecanica .form-group{
+        float: left;
+        width:100%;
+    }
+
+    .maintenance .reparos-g .tipo-mecanica span{
+        text-transform: uppercase;
+    }
+}
+
+/*--- MAXIMO 580px Width*/
+@media (max-width:580px){
+    #bankAccount .dataBank{
+        width:50%;
+    }
+
+    #bankAccount .dataBank:nth-child(n+4){
+        border-top:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(4n+1){
+        border-left:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(3n+1){
+        border-left:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(n+3){
+        border-top:1px dashed #ccc;
+    }
+
+    #bankAccount .dataBank:nth-child(2n+1){
+        border-left: none;
+    }
+}
+
+/*--- MAXIMO 440px Width*/
+@media (max-width:440px){
+    #bankAccount .dataBank{
+        width:100%;
+        border-top: 1px dashed #ccc;
+        border-left:none;
+    }
+
+    #bankAccount .dataBank:nth-child(1){
+        border-top: none;
+    }
+
+    #bankAccount .dataBank:nth-child(4n+1){
+        border-left:none;
+    }
+
+    #bankAccount .dataBank:nth-child(3n+1){
+        border-left:none;
+    }
+
+    #bankAccount .dataBank:nth-child(2n+1){
+        border-left: none;
+    }
+
+    /*PREÇO POR PRODUTO*/
+    .pr-prod .produto{
+        width:100%;
+    }
+
+    /* SERVIÇOS PRESTADOS */
+    .rf-al .d-alimentacao, .rf-al .bl-block{
+        float: left;
+        width:100%;
+    }
+
+    .scroll-mobile{
+        overflow: hidden;
+    }
+
+    .flag-chart{
+        overflow-x: scroll !important;
+        float: left;
+        width:100%;
+    }
+
+    /* ANTECIPAÇÃO AUTOMATICA */
+    .month-days .form-group{
+        width:25% !important;
+    }
+
+}
+

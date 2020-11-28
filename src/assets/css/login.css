@@ -1,0 +1,280 @@
+/*PAGINA LOGIN*/
+.modal {
+    left: 0px !important;
+}
+#login-page{
+    font-weight:normal !important;
+}
+
+#login-page #portalAgLogin, #login-page .info-login, #login-page .bl-agilli{
+    /*border:1px solid #000;*/
+}
+
+.bg-home{
+    background: url(../images/bg-login.png) no-repeat left top;
+    -webkit-background-size: cover;
+    background-size: cover;
+    min-height:800px;
+    max-height:50000px;
+    position: absolute;
+    height:100%;
+    width:100%;
+}
+
+#login-page .bl-agilli{
+    width: 100%;
+    float: none !important;
+    max-width: 950px;
+    margin:0 auto !important;
+}
+
+#login-page .info-login{
+    width:95%;
+    padding:10px;
+    max-width: 370px;
+    float: right;
+    margin:60px auto 0 auto;
+}
+
+#login-page .info-login .logo-agilli{
+    background: url(./../images/logo-agilli.png) no-repeat left top;
+    width: 100%;
+    text-align: left;
+    max-width:180px;
+    height: 88px;
+    -webkit-background-size:100%;
+    background-size:100%;;
+}
+
+/*FORMULARIO LOGIN PAGE*/
+#login-page #portalAgLogin{
+    width:100%;
+    margin:35px 0 0 0;
+    max-width: 350px;
+}
+
+#login-page #portalAgLogin .act-form{
+    margin-top: 35px;
+    float: left;
+    width:100%;
+}
+
+#login-page #portalAgLogin .act-form .botao{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight:normal;
+    outline: 0;
+    float: right;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+#login-page #portalAgLogin .act-form .esqueci-senha{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight:normal;
+    float: left;
+    background: #004853;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+#login-page #portalAgLogin label{
+    display: block;
+    padding:10px 0;
+    position: relative;
+}
+
+#login-page #portalAgLogin label i{
+    position: absolute;
+    top:58%;
+    right:5%;
+}
+
+#login-page #portalAgLogin legend{
+    text-transform: uppercase;
+    font-size:1.4em;
+    font-stretch: ultra-expanded !important;
+    letter-spacing: 2px;
+    color: #808080;
+    margin-bottom:12px;
+    border:none;
+    font-weight: normal;
+}
+
+#login-page #portalAgLogin label .form-control{
+    font-weight:normal !important;
+    -webkit-border-radius:0px !important;
+    -moz-border-radius:0px !important;
+    border-radius:0px !important;
+    padding:0px 15px;
+    border:none !important;
+    -webkit-box-shadow: 8px 19px 40px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 8px 19px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 8px 19px 40px rgba(0, 0, 0, 0.3);
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size:1.1em;
+}
+
+#login-page #portalAgLogin label .form-control:focus{
+    background: #656565;
+    color: #fff;
+    /*SHADOW*/
+    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+    box-shadow: 8px 19px 40px rgba(0, 0, 0, 0.3);
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+/*MODAL ESQUECI MINHA SENHA*/
+#login-page #esqueci-senha-modal .form-control{
+    font-weight:normal !important;
+    -webkit-border-radius:0px !important;
+    -moz-border-radius:0px !important;
+    border-radius:0px !important;
+    padding:0px 15px;
+    border:1px solid rgba(110,115,114,0.7)!important;
+    /*SHADOW*/
+    -webkit-box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-size:1.2em;
+}
+
+#login-page #esqueci-senha-modal .form-control:focus{
+    background: #fff;
+    color: #1b6d85;
+    /*SHADOW*/
+    -webkit-box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+#esqueci-senha-modal .modal-header{
+    background: #ff6300;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+#esqueci-senha-modal .modal-header .modal-title{
+    font-family:"OpenB", "Open Sans", 'Source Sans Pro';
+}
+
+#esqueci-senha-modal .close{
+    color: #fff;
+    opacity:.5;
+}
+
+#login-page #esqueci-senha-modal .modal-footer{
+    /*float: right;*/
+}
+
+#login-page #esqueci-senha-modal .botao{
+    color: #fff;
+    text-transform: uppercase;
+    float: right;
+    font-weight:normal;
+    outline: 0;
+    background: #204d74;
+    margin-left:5px;
+    /*Transition*/
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+/*CSS CAMPOS DE LOGIN*/
+/*RESPONSIVIDADE - TELA DE LOGIN*/
+/* ----  BREAKPOINT - */
+@media (min-width: 1000px) {
+    #login-page #portalAgLogin .act-form .botao:hover{
+        background: #004853;
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+
+    #esqueci-senha-modal .close:hover{
+        color: #fff;
+        opacity:1;
+    }
+
+    #login-page #esqueci-senha-modal .botao:hover{
+        background: #004853;
+        /*Transition*/
+        transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+}
+
+@media (max-width: 1200px){
+    .bg-home{
+        background-position: -115px 0 !important;
+    }
+}
+
+@media (max-width: 900px){
+    .bg-home{
+        background: -webkit-radial-gradient(#2e6da4, #122b40) !important;
+        background-position: -500px 0;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background: #122B40;
+    }
+    #login-page .info-login{
+        float: none;
+        background: rgba(255, 255, 255, 1);
+        padding:25px 8px;
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    }
+    /*CONTROLE DOS INPUTS LOGIN PAGE NO RESPONSIVO*/
+    #login-page #portalAgLogin label .form-control{
+        border:1px solid rgba(110,115,114,0.7)!important;
+    }
+    #login-page .info-login .logo-agilli{
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 390px){
+    #login-page #portalAgLogin .act-form .botao{
+        clear: both;
+        width:100%;
+        margin-bottom:5px;
+    }
+
+    #login-page #esqueci-senha-modal .botao{
+        clear: both;
+        width:100%;
+        margin-bottom:5px;
+    }
+}

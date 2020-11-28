@@ -1,0 +1,320 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+	<section class="Title">
+		Cadastro >> Usina
+	</section>
+	
+	<section class="BoxApp">
+		<form id="form-search-clientes" [formGroup]="formSearch">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome</label>
+						<input class="form-control" id="nomeSearch" type="text" placeholder="Nome da Usina..." [formControl]="formSearch.controls.descricao">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Status</label>
+						<select id="status" [formControl]="formSearch.controls.status">
+							<option value="ATIVO" selected>ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Início</label>
+						<input type="text"
+							class="form-control"
+							#dp="bsDatepicker"
+							formControlName="dataCadastroInicio"
+							bsDatepicker
+							[bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Fim</label>
+						<input type="text"
+							class="form-control"
+							#dp="bsDatepicker"
+							formControlName="dataCadastroFim"
+							bsDatepicker
+							[bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button (click)="showModalCadastro = !showModalCadastro" class="botao">Novo</button>
+				</div>
+				<div class="col-md-6">
+					<div class="app-boxBotoes--direita">
+						<button class="botao cinza" (click)="limparForm()">Limpar</button>
+						<input class="botao" type="submit" (click)="pesquisarUsinas(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<section class="BoxApp">
+		<ngx-datatable #myTable
+			class="bootstrap"
+			[rows]="listUsinas"
+			[columnMode]="'force'"
+			[headerHeight]="50"
+			[footerHeight]="50"
+			[rowHeight]="'auto'"
+			[messages]="{emptyMessage: 'Sem dados...'}"
+			[limit]="15">
+
+			<ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" name="Ações">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					<div class="datatable-body-box-actions" *ngIf="row.status == 'ATIVO'">
+						<a class="home-icon" (click)="editarUsina(row)" title="Editar">
+							<i class="fas fa-pencil-alt"></i>
+						</a>
+						<a class="home-icon" (click)="inativarUsina(row)" title="Inativar">
+							<i class="fas fa-times"></i>
+						</a>
+					</div>
+					<div class="datatable-body-box-actions" *ngIf="row.status == 'INATIVO'">
+						<a class="home-icon" (click)="ativarUsina(row)" title="Ativar">
+							<i class="fas fa-check"></i>
+						</a>
+					</div>
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+			<ngx-datatable-column name="Usina" prop="nome"></ngx-datatable-column>
+			<ngx-datatable-column name="Potência" prop="potenciaKw">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ row.potenciaKw.toLocaleString('pt-BR') }}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Disponibilidade" prop="disponibilidade"></ngx-datatable-column>
+			<ngx-datatable-column name="Geração Total KWh" prop="geracaoTotalKwh">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ row.geracaoTotalKwh.toLocaleString('pt-BR') }}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Status" prop="status"></ngx-datatable-column>
+			<ngx-datatable-column name="Data Cadastro" prop="dataCadastro">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataCadastro) }} 
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Data Alteração" prop="dataUltimaAtualizacao">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataUltimaAtualizacao) }} 
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-footer>
+				<ng-template 
+				ngx-datatable-footer-template 
+				let-rowCount="rowCount"
+				let-pageSize="pageSize"
+				let-selectedCount="selectedCount"
+				let-curPage="curPage"
+				let-offset="offset">
+				<div>
+					<div class="page-count">
+					Total de Registros: {{rowCount}}
+					</div>
+				</div>
+				<datatable-pager
+						[pagerLeftArrowIcon]="'fa fa-angle-double-left'"
+						[pagerRightArrowIcon]="'fa fa-angle-double-right '"
+						[pagerPreviousIcon]="'fa fa-angle-left'"
+						[pagerNextIcon]="'fa fa-angle-right '"
+						[page]="curPage"
+						[size]="pageSize"
+						[count]="rowCount"
+						[hidden]="!((rowCount / pageSize) > 1)"
+						(change)="table.onFooterPage($event)">
+					</datatable-pager>
+				</ng-template>
+			</ngx-datatable-footer>
+
+		</ngx-datatable>
+	</section>
+
+</div>
+
+<app-dialog [(visible)]="showModalCadastro">
+
+	<div class="dialog-header">
+		Cadastro de Usina
+		<a (click)="fecharModal()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<form id="form-save-usina" [formGroup]="formSave">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome</label>
+						<input class="form-control" id="nomeSearch" type="text" placeholder="Nome da Usina..." [formControl]="formSave.controls.nome">
+						<div class="input-error" *ngIf="formSave.get('nome').touched && formSave.get('nome').hasError('required')">
+							Nome é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Potência kW</label>
+						<input currencyMask class="form-control" formControlName="potenciaKw" (blur)="calcForm()" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+						<div class="input-error" *ngIf="formSave.get('potenciaKw').touched && formSave.get('potenciaKw').hasError('required')">
+							Potência é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Horas Geração/Mês</label>
+						<input currencyMask class="form-control" (blur)="calcForm()" formControlName="horasGeracaoMes" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('horasGeracaoMes').touched && formSave.get('horasGeracaoMes').hasError('required')">
+							Horas Geração/Mês é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Disponibilidade - %</label>
+						<input currencyMask class="form-control" formControlName="disponibilidade" (blur)="calcForm()" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('disponibilidade').touched && formSave.get('disponibilidade').hasError('required')">
+							Disponibilidade é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Geração Total kWh/Mês</label>
+						<input currencyMask class="form-control" formControlName="geracaoTotalKwh" readonly [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Comissão R$/1.000 kWh</label>
+						<input currencyMask class="form-control" formControlName="comissaoVenda" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('comissaoVenda').touched && formSave.get('comissaoVenda').hasError('required')">
+							Comissão Venda é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Prêmio Primeiro Lugar</label>
+						<input currencyMask class="form-control" formControlName="premio" (blur)="calcForm()" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('premio').touched && formSave.get('premio').hasError('required')">
+							1º Lugar é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Comissão Total Venda</label>
+						<input currencyMask class="form-control" formControlName="comissaoTotalVenda" readonly [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"/>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Custo Total</label>
+						<input currencyMask class="form-control" formControlName="custoTotal" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"/>
+						<div class="input-error" *ngIf="formSave.get('custoTotal').touched && formSave.get('custoTotal').hasError('required')">
+							Custo Total é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- <div class="box-usinas">
+			<p class="title-concorrentes">Concorrentes</p>
+			<form id="form-add-concorrentes" [formGroup]="formConcorrente">
+				<div class="row">
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Nome do Concorrente</label>
+							<input class="form-control" id="nomeSearch" type="text" [formControl]="formConcorrente.controls.nome">
+							<div class="input-error" *ngIf="formConcorrente.get('nome').touched && formConcorrente.get('nome').hasError('required')">
+								Nome é obrigatório.
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Percentual</label>
+							<input currencyMask class="form-control" formControlName="percentualAdicional" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"/>
+							<div class="input-error" *ngIf="formConcorrente.get('percentualAdicional').touched && formConcorrente.get('percentualAdicional').hasError('required')">
+								Percentual é obrigatório.
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1">
+						<button class="botao cinza botao-mais" style="margin-top: 25px;" (click)="addConcorrente(formConcorrente.value)">+</button>
+					</div>
+				</div>
+			</form>
+			<div class="item-usina" *ngFor="let conc of concorrentesList; let i = index">
+				<a (click)="removerLinha(i)">X</a>
+				{{ conc.nome }} - % {{ conc.percentualAdicional }}
+			</div>
+		</div> -->
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita" *ngIf="showBtSalvar">
+					<button class="botao cinza" (click)="fecharModal()">Cancelar</button>
+					<input class="botao" type="submit" (click)="sendForm(formSave.value)" id="salvar-user" value="Salvar">
+				</div>
+				<div class="app-boxBotoes--direita" *ngIf="!showBtSalvar">
+					<img class="loader-bt-save" src="assets/img/ajax-loader.gif" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+<app-dialog [(visible)]="showModalDesativar">
+
+	<div class="dialog-header">
+		Deseja desativar a Usina "{{ objDesativar.nome }}"?
+		<a (click)="fecharModalDesativar()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="fecharModalDesativar()">Cancelar</button>
+					<input class="botao cinza" type="submit" (click)="sendDesativar()" id="salvar-oport" value="Desativar">
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</app-dialog>		

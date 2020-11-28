@@ -1,0 +1,22 @@
+<div class="login-wrap">
+	<div class="login-box">
+		<div class="login-boxForm">
+			<div class="login-boxForm--img">
+				<img src="assets/img/logo.png" />
+			</div>
+			<form id="form-login" [formGroup]="loginForm">
+				<div *ngIf="!showFormEsqueci">
+					<input type="text" name="email" placeholder="Login" [formControl]="loginForm.controls.login"/>
+					<input type="password" name="senha" placeholder="Senha" [formControl]="loginForm.controls.password"/>
+					<a (click)="esqueciSenha()">Esqueci minha senha</a>
+					<button (click)="login(loginForm.value)" type="submit">Entrar</button>
+				</div>
+				<div *ngIf="showFormEsqueci">
+					<input type="text" name="email" placeholder="Informe seu Login" [formControl]="loginForm.controls.login"/>
+					<a (click)="esqueciSenha()">Voltar</a>
+					<button (click)="esqueci(loginForm.value)" type="submit">Confirmar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

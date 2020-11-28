@@ -1,0 +1,166 @@
+.Title-text {
+    line-height: 40px;
+    margin: 0 20px 0 0;
+    display: inline-block;
+}
+
+.Title .botao {
+    display: inline-block;
+    line-height: 1.5;
+    position: absolute;
+}
+
+.ajuste-br {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.box-meses {
+    margin-top: 10px;
+}
+
+.titulo-bloco {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.label-mes {
+    font-size: 14px;
+    margin-left: 15px;
+    line-height: 32px;
+}
+
+.input-consumo {
+    height: 30px;
+    margin-bottom: 5px;
+    padding: 2px 4px;
+    font-size: 14px;
+}
+
+.title-resumo {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.label-resumo {
+    font-size: 14px;
+}
+
+.valor-resumo {
+    background: #b0b0b0;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 4px 12px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.valor-detalhe-cliente {
+    background: #b0b0b0;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 0 8px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.table-concorrentes {
+    width: 100%;
+}
+
+.table-concorrentes thead {
+    font-weight: bold;
+    font-size: 14px;
+    background: #f4f4f4;
+    line-height: 22px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-concorrentes thead th {
+    padding: 0 5px;
+    border: 1px solid #d0d0d0;
+}
+
+.table-concorrentes tbody {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.table-concorrentes tbody td {
+    padding: 0 5px;
+    border: 1px solid #d0d0d0;
+}
+
+.table-price {
+    width: 100%;
+}
+
+.table-price thead {
+    font-weight: bold;
+    font-size: 12px;
+    background: #c8c8c8;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-price thead th {
+    border: 1px solid #aeaeae;
+}
+
+.table-price tbody {
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.table-price tbody tr:hover {
+    background: #d8d8d8;
+}
+
+.table-price tbody td {
+    padding: 0 2px;
+    border: 1px solid #d0d0d0;
+}
+
+.app-tabsBox--in {
+    min-height: 630px;
+}
+
+.ajuste-bt-search {
+    margin-top: 22px;
+}
+
+.bt-right {
+    text-align: right;
+    width: 100%;
+}
+
+.valor-parceiro {
+    background: #c9c9c9;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 4px 10px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.box-impressao {
+    padding: 40px 60px;
+}
+
+.box-impressao label {
+    font-size: 15px;
+}

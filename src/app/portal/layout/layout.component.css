@@ -1,0 +1,254 @@
+.header {
+    box-shadow: 0 1px 2px 0 rgba(50,50,50,.2);
+    background: #222;
+    height: 65px;
+    position: fixed;
+    z-index: 999;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: all .2s ease-in;
+    width: 100%;
+}
+
+.bt-logout {
+    height: 65px;
+    width: 50px;
+    line-height: 65px;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    top: 0px;
+}
+
+.bt-logout:hover {
+    color: #fea525 !important;
+    background: #373737;
+}
+
+.header-box-user {
+    padding: 0 65px 0px 65px;
+    position: relative;
+    position: absolute;
+    height: 65px;
+    right: 0;
+    top: 0;
+    max-width: 330px;
+    color: #FFF;
+}
+
+.header-box-user .fa-user {
+    position: absolute;
+    left: 14px;
+    top: 0px;
+    font-size: 28px;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.header-user-email {
+    font-size: 12px;
+    line-height: 15px;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.header-user-name {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+    margin-top: 12px;
+    font-weight: bold;
+    text-align: left;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.header-box-user-mobile {
+    display: none;
+}
+
+.header-box-user-mobile {
+    padding: 0px 15px 15px 60px;
+    position: relative;
+    margin-top: 15px;
+    color: #fff;
+    border-bottom: 1px solid #3f3f3f;
+}
+
+.header-box-user-mobile .fa-user {
+    position: absolute;
+    left: 14px;
+    top: 0px;
+    font-size: 35px;
+}
+
+.side-bar {
+    position: fixed;
+    background: #f4f4f4;
+    width: 70px;
+    height: 100%;
+    z-index: 999;
+    transition-property: width;
+    transition-duration: 0.3s;
+    text-align: right;
+    box-shadow: 0 1px 15px 0 rgba(50,50,50,.2);
+}
+
+.side-bar--open {
+    width: 215px;
+}
+
+.side-bar-button {
+    width: 70px;
+    height: 65px;
+    background: #ffffff;
+    display: inline-block;
+    transition-property: width;
+    transition-duration: 0.3s;
+}
+
+.side-bar--open .side-bar-button{
+    width: 215px;
+}
+
+.side-bar-button-logo {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    line-height: 65px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.side-bar-button-long {
+    display: none;
+    width: 0;
+    height: 65px;
+}
+
+.side-bar--open .side-bar-button-short{
+    display: none;
+}
+
+.side-bar--open .side-bar-button-long{
+    display: inline-block;
+    width: 100%;
+    transition-property: width;
+    transition-duration: 0.3s;
+    height: 65px;
+}
+
+.menu {
+	width: auto;
+    height: auto;
+    margin-top: 15px;
+}
+
+.menu > li {
+    position: relative;
+    height: 50px;
+}
+
+.menu > li > a {
+    width: 70px;
+	height: 50px;
+	display: inline-block;
+	color: #444;
+    font-size: 15px;
+	text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    padding-left: 60px;
+    transition-property: width;
+    transition-duration: 0.3s;
+}
+
+.menu > li > a:hover {
+    background: #dbdbdb;
+}
+
+.menu > li > a > i { 
+    font-size: 25px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    text-align: center;
+}
+
+.menu > li > a > span { 
+    font-size: 14px;
+    text-transform: uppercase;
+    display: none;
+    line-height: 55px;
+    text-align: left;
+    width: 100%;
+}
+
+.menu--open> li > a { 
+    width: 215px;
+}
+
+.menu--open> li > a > span { 
+    display: inline-block;
+}
+
+.sub-menu {
+    position: absolute;
+    left: 215px;
+    top: 0;
+    background: #666;
+    width: 200px;
+    height: auto;
+    list-style: none;
+    display: none;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+.sub-menu > li > a {
+    width: 100%;
+    text-align: left;
+    height: 35px;
+    line-height: 35px;
+    display: block;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.sub-menu > li > a > span{
+    margin-left: 10px;
+}
+
+.sub-menu > li > a:hover {
+    background: #333;
+}
+
+.menu > li:hover {
+    background: #dbdbdb;
+}
+
+.menu > li:hover > ul {
+    display: inline;
+    opacity: 1;
+}

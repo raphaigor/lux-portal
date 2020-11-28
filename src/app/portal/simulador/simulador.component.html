@@ -1,0 +1,782 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+	<section class="Title">
+		<span class="Title-text">Simulador</span>
+		<button (click)="openSimular()" class="botao">Nova Simulação</button>
+	</section>
+
+	<div class="row" *ngIf="objSimulacao.valorFinanciado && dadosUser.vendedorId">
+		<div class="col-md-12">
+			<div class="ajuste-br">
+				<button (click)="novaVenda(formSimular.value)" class="botao cinza">EFETUAR VENDA</button>
+				<button (click)="sendImprimir()" class="botao cinza">IMPRIMIR</button>
+			</div>
+		</div>
+	</div>
+
+	<section class="BoxApp" *ngIf="objSimulacao.consumoContrado">
+
+		<p style="font-size: 25px; line-height: 40px; font-weight: bold; text-align: center; margin-bottom: 30px;">SIMULAÇÃO</p>
+
+		<p class="title-resumo" style="margin-bottom: 30px;">RESUMO</p>
+		<hr />
+
+		<div class="row" style="margin-bottom: 30px;">
+			<!-- <div class="col-md-3">
+				<label>Nome Usina</label>
+				<span class="valor-resumo">{{ objImprimir.nomeUsina[0].nome }}</span>
+			</div> -->
+			<div class="col-md-3">
+				<label>Classe</label>
+				<span class="valor-resumo">{{ objImprimir.nomeRede[0].descricao }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Parceiro</label>
+				<span class="valor-resumo">{{ objImprimir.parceiro[0].razaoSocial }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Usuário</label>
+				<span class="valor-resumo">{{ dadosUser.nome }}</span>
+			</div>
+		</div>
+		
+		<p class="title-resumo" style="margin-bottom: 30px; font-size: 20px;">Histórico de Consumo</p>
+		
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-md-2" *ngFor="let item of objImprimir.listConsumo; let x = index">
+				<label>Mês {{x+1}}</label>
+				<span class="valor-resumo" style="text-align: right !important;">{{ item.toLocaleString('pt-BR') }}</span>
+			</div>
+		</div>
+		
+		<hr />
+		<div class="row">
+			<div class="col-md-3">
+				<label>Consumo Contratado</label>
+				<span class="valor-resumo">{{ objSimulacao.consumoContrado.toFixed(0) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Valor Financiado</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorFinanciado) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Taxa Minima CEMIG Mês</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.taxaMinimaCemigMes) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Número de Parcelas do Financiamento</label>
+				<span class="valor-resumo">{{ objSimulacao.numeroParcelasFinanciamento }}</span>
+			</div>
+	
+			<div class="col-md-3">
+				<label>Custo da Usina (O&M)</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.custoUsinaCooperativaMes) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Primeira Parcela</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorPrimeiraParcelaFinanciamento) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Última Parcela do Financiamento</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorUltimaParcelaFinanciamento) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Valor Economizado Mês/CEMIG</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoMes) }}</span>
+			</div>
+	
+			
+			<div class="col-md-3">
+				<label>Valor Economizado Total/CEMIG</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoTotal) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Percentual de Participação na Geração da Usina/Mês</label>
+				<span class="valor-resumo">{{ objSimulacao.direitoEnegiaInjetadaUsinaGeradora.toFixed(8) }}</span>
+			</div>
+	
+			<div class="col-md-3">
+				<label>Percentual Redução CEMIG</label>
+				<span class="valor-resumo">{{ objSimulacao.percentualReducaoContaCemig.toFixed(1) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Comissão do Vendedor</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.comissaoVendedor) }}</span>
+			</div>
+			<!-- <div class="col-md-3">
+				<label>Taxa Interna de Retorno</label>
+				<span class="valor-resumo">{{ objSimulacao.taxaInternaRetorno.toFixed(1) }}</span>
+			</div> -->
+			<div class="col-md-3">
+				<label>Desembolso</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.realPago) }}</span>
+			</div>
+			<div class="col-md-3">
+				<label>Efetivamente Pago</label>
+				<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.efetivamentePago) }}</span>
+			</div>
+		</div>
+
+		<hr />
+
+		<p class="title-resumo" style="margin-top: 30px; margin-bottom: 30px; font-size: 20px;">GRÁFICO COMPARATIVO</p>
+
+		<canvas baseChart *ngIf="showGrafico"
+			class="grafico-box"
+			[datasets]="barChartData"
+			[labels]="barChartLabels"
+			[options]="barChartOptions"
+			[legend]="barChartLegend"
+			[colors]="lineChartColors"
+			[chartType]="barChartType">
+		</canvas>
+
+		<hr />
+
+	</section>
+
+	<section class="BoxApp" *ngIf="objSimulacao.consumoContrado">
+		<p class="title-resumo" style="margin-top: 30px; margin-bottom: 30px; font-size: 20px;">TABELA SAC</p>
+
+		<div style="max-height: 600px; overflow-y: scroll;">
+			<table class="table-price">
+				<colgroup>
+					<col style="width:8%">
+					<col style="width:13%">
+					<col style="width:13%">
+					<col style="width:13%">
+					<col style="width:13%">
+					<col style="width:13%">
+					<col style="width:13%">
+					<col style="width:13%">
+				</colgroup>  
+				<thead>
+					<tr>
+						<th>MÊS</th>
+						<th>SALDO DEVEDOR</th>
+						<th>AMORTIZAçãO</th>
+						<th>Correção Financiamento</th>
+						<th>Correção da Carência</th>
+						<th>CORREçãO Total</th>
+						<!-- <th>CORRECAO CARENCIA</th> -->
+						<th>PARCELA</th>
+						<!-- <th>SALDO</th> -->
+						<!-- <th>CUSTO CEMIG</th> -->
+						<!-- <th>O&M</th> -->
+						<!-- <th>FUNDO RESERVA</th> -->
+						<!-- <th>TAXA DISPONIB</th> -->
+						<!-- <th>REDUCAO CEMIG</th> -->
+						<th>PERCENTUAL REDUçãO</th>
+						<!-- <th>RESULTADO CEMIG</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let price of listPrice">
+						<td style="text-align: center">{{ price.mes }}</td>
+						<td style="text-align: right">R$ {{ formatValorReal(price.saldoDevedor) }}</td>
+						<td style="text-align: right">R$ {{ formatValorReal(price.amortizacao) }}</td>
+						<td style="text-align: right">{{ price.correcao.toFixed(2) }}</td>
+						<td style="text-align: right">{{ price.correcao2.toFixed(2) }}</td>
+						<td style="text-align: right">{{ price.correcaoAcumulada.toFixed(2) }}</td>
+						<!-- <td>{{ price.correcaoCarencia.toFixed(2) }}</td> -->
+						<td style="text-align: right">R$ {{ formatValorReal(price.parcelaFinanciamento) }}</td>
+						<!-- <td>{{ price.saldo }}</td> -->
+						<!-- <td>{{ price.custoContaCemig }}</td> -->
+						<!-- <td>{{ price.oem }}</td> -->
+						<!-- <td>{{ price.fundoReserva }}</td> -->
+						<!-- <td>{{ price.taxaDisponibilidade }}</td> -->
+						<!-- <td>{{ price.reducaoContaCemig }}</td> -->
+						<td style="text-align: right">{{ price.percentualReferenteReducaoConta.toFixed(2) }}</td>
+						<!-- <td>{{ price.resultadoCemig }}</td> -->
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+	</section>
+
+</div>
+
+<app-dialog [(visible)]="showModalSimulacao">
+
+	<div class="dialog-header">
+		Nova Simulação
+		<a (click)="fecharModalVenda()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+
+		<form id="form-simular" [formGroup]="formSimular">
+
+			<div class="row">
+				<!-- <div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Usina</label>
+						<select #t [formControl]="formSimular.controls.usinaId">
+							<option *ngFor="let usina of listUsinas; let i = index" [value]="usina.id">{{ usina.nome }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSimular.get('usinaId').touched && formSimular.get('usinaId').hasError('required')">
+							Usina é obrigatório.
+						</div>
+					</div>
+				</div> -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Classe</label>
+						<select #t [formControl]="formSimular.controls.tipoRedeEletricaId">
+							<option *ngFor="let rede of listRedeEletrica; let i = index" [value]="rede.id">{{ rede.descricao }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSimular.get('tipoRedeEletricaId').touched && formSimular.get('tipoRedeEletricaId').hasError('required')">
+							Classe é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6" *ngIf="dadosUser.tipoUsuario == 'ADMINISTRADOR' || dadosUser.tipoUsuario == 'USUARIO_TERCEIRO'">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Parceiro</label>
+						<select #t [formControl]="formSimular.controls.parceiroId">
+							<option *ngFor="let parc of listParceiro; let i = index" [value]="parc.id">{{ parc.razaoSocial }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSimular.get('parceiroId').touched && formSimular.get('parceiroId').hasError('required')">
+							Parceiro é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row box-meses">
+				<p class="titulo-bloco">Histórico de Consumo - Últimos 12 Meses</p>
+				<div class="col-md-12">
+					<div class="row" formArrayName="historicoConsumo">
+						<ng-container *ngFor="let item of formSimular.get('historicoConsumo')['controls']; let i = index">
+							<div class="col-md-3" [formGroupName]="i">
+								<div class="form-group">
+									<label class="">Mês {{ i + 1 }}</label>
+									<input currencyMask class="form-control" formControlName="price" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+				
+			</div>
+
+		</form>
+
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao cinza" (click)="fecharModalSimular()">Cancelar</button>
+					<button (click)="simular(formSimular.value)" class="botao">SIMULAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+<app-dialog [(visible)]="showModalVenda">
+
+	<div class="dialog-header">
+		Nova Venda
+		<a (click)="fecharModalVenda()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="exampleInputEmail1">CPF/CNPJ</label>
+					<input class="form-control" id="nomeSearch" type="text" (blur)="formatInputVenda(formSearchCliente.value)" [formControl]="formSearchCliente.controls.cnpjCpf">
+					<div class="input-error" *ngIf="formSearchCliente.get('cnpjCpf').touched && formSearchCliente.get('cnpjCpf').hasError('required')">
+						CPF/CNPJ é obrigatório.
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<button class="botao cinza ajuste-bt-search" (click)="buscarCliente(formSearchCliente.value)">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+			<div class="col-md-3">
+				<div class="bt-right">
+					<button class="botao cinza ajuste-bt-search" (click)="cadastrarCliente(formSearchCliente.value)">
+						ADD CLIENTE
+					</button>
+				</div>
+			</div>
+		</div>
+		<form id="form-save-usina" [formGroup]="formSaveVenda" style="margin-bottom: 15px;" *ngIf="clienteSelecionado.id">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome do Cliente</label>
+						<span class="valor-detalhe-cliente">{{ clienteSelecionado.nome }}</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Cidade/Estado</label>
+						<span class="valor-detalhe-cliente">{{ clienteSelecionado.cidade }}/{{ clienteSelecionado.uf }}</span>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">E-mail</label>
+						<span class="valor-detalhe-cliente">{{ clienteSelecionado.email }}</span>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Contato</label>
+						<span class="valor-detalhe-cliente">{{ clienteSelecionado.contato1 }}</span>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Responsável</label>
+						<span class="valor-detalhe-cliente">{{ clienteSelecionado.responsavel }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Banco/Agência/CC</label>
+						<input class="form-control" type="text" [formControl]="formSaveVenda.controls.bancoAgenciaContaCorrente">
+						<div class="input-error" *ngIf="formSaveVenda.get('bancoAgenciaContaCorrente').touched && formSaveVenda.get('bancoAgenciaContaCorrente').hasError('required')">
+							Banco/Agência/CC é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box-checkbox" style="margin: 30px 0 0;">
+						<label for="exampleInputEmail1">Usar o endereço cadastrado?</label>
+						<label>
+							<input type="radio" name="parecer" value="GO" checked style="margin-left: 15px;" (click)="naoUsarEndereco()"> Não 
+						</label>
+						<label>
+							<input type="radio" name="parecer" value="GO" style="margin-left: 15px;" (click)="usarEndereco()"> Sim 
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">CEP</label>
+						<input class="form-control" id="nomeSearch" type="text" mask="00.000-000" [formControl]="formSaveVenda.controls.cep">
+						<div class="input-error" *ngIf="formSaveVenda.get('cep').touched && formSaveVenda.get('cep').hasError('required')">
+							CEP é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Endereço</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.endereco">
+						<div class="input-error" *ngIf="formSaveVenda.get('endereco').touched && formSaveVenda.get('endereco').hasError('required')">
+							Endereço é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Número</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.numero">
+						<div class="input-error" *ngIf="formSaveVenda.get('numero').touched && formSaveVenda.get('numero').hasError('required')">
+							Número é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Bairro</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.bairro">
+						<div class="input-error" *ngIf="formSaveVenda.get('bairro').touched && formSaveVenda.get('bairro').hasError('required')">
+							Bairro é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Cidade</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.cidade">
+						<div class="input-error" *ngIf="formSaveVenda.get('cidade').touched && formSaveVenda.get('cidade').hasError('required')">
+							Cidade é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Estado</label>
+						<select #t [formControl]="formSaveVenda.controls.uf">
+							<option *ngFor="let estado of listEstados; let i = index" [value]="estado.sigla">{{ estado.nome }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSaveVenda.get('uf').touched && formSaveVenda.get('uf').hasError('required')">
+							Estado é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Número da Instalação CEMIG</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.numeroInstalacao">
+						<div class="input-error" *ngIf="formSaveVenda.get('numeroInstalacao').touched && formSaveVenda.get('numeroInstalacao').hasError('required')">
+							Número da Instalação é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Número da Instalação CEMIG</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveVenda.controls.numeroInstalacao2">
+						<div class="input-error" *ngIf="formSaveVenda.get('numeroInstalacao2').touched && formSaveVenda.get('numeroInstalacao2').hasError('required')">
+							Número da Instalação é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="exampleInputEmail1">Conta Cemig</label>
+					<div class="formWrapper">
+						<div class="upload">
+							<div class="inputFileOverlay">{{ descFile }}</div>
+							<div class="inputFileButton">SELECIONAR</div>
+							<input type="file" name="upload" (change)="handleFileInput($event.target.files)"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="exampleInputEmail1">Observação</label>
+					<textarea [formControl]="formSaveVenda.controls.observacao"></textarea>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Status</label>
+						<select #t [formControl]="formSaveVenda.controls.status">
+							<option *ngFor="let status of listStatusVenda; let i = index" [value]="status">{{ status }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSaveVenda.get('status').touched && formSaveVenda.get('status').hasError('required')">
+							Status é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao cinza" (click)="fecharModalVenda()">Cancelar</button>
+					<input class="botao" type="submit" (click)="sendFormVenda(formSaveVenda.value)" id="salvar-user" value="Salvar" *ngIf="clienteSelecionado.id">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+
+<app-dialog [(visible)]="showModalCliente">
+
+	<div class="dialog-header">
+		Cadastro de Cliente
+		<a (click)="fecharModalCliente()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<form id="form-save-usina" [formGroup]="formSaveCliente">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">CPF/CNPJ</label>
+						<input class="form-control" (blur)="format2(formSaveCliente.value.cnpjCpf)" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.cnpjCpf">
+						<div class="input-error" *ngIf="formSaveCliente.get('cnpjCpf').touched && formSaveCliente.get('cnpjCpf').hasError('required')">
+							CPF/CNPJ é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.nome">
+						<div class="input-error" *ngIf="formSaveCliente.get('nome').touched && formSaveCliente.get('nome').hasError('required')">
+							Nome é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">CEP</label>
+						<input class="form-control" mask="00.000-000" id="nomeSearch" type="text" (blur)="buscarCep(formSaveCliente.value.cep)" [formControl]="formSaveCliente.controls.cep">
+						<div class="input-error" *ngIf="formSaveCliente.get('cep').touched && formSaveCliente.get('cep').hasError('required')">
+							CEP é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Endereço</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.endereco">
+						<div class="input-error" *ngIf="formSaveCliente.get('endereco').touched && formSaveCliente.get('endereco').hasError('required')">
+							Endereço é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Número</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.numero">
+						<div class="input-error" *ngIf="formSaveCliente.get('numero').touched && formSaveCliente.get('numero').hasError('required')">
+							Número é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Complemento</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.complemento">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Bairro</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.bairro">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Cidade</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.cidade">
+						<div class="input-error" *ngIf="formSaveCliente.get('cidade').touched && formSaveCliente.get('cidade').hasError('required')">
+							Cidade é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Estado</label>
+						<select #t [formControl]="formSaveCliente.controls.uf">
+							<option *ngFor="let estado of listEstados; let i = index" [value]="estado.sigla">{{ estado.nome }}</option>
+						</select>
+						<div class="input-error" *ngIf="formSaveCliente.get('uf').touched && formSaveCliente.get('uf').hasError('required')">
+							Estado é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Telefone</label>
+						<input class="form-control" id="nomeSearch" type="text" mask="(00) 00000-0000" [formControl]="formSaveCliente.controls.contato1">
+						<div class="input-error" *ngIf="formSaveCliente.get('contato1').touched && formSaveCliente.get('contato1').hasError('required')">
+							Telefone é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">E-mail</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.email">
+						<div class="input-error" *ngIf="formSaveCliente.get('email').touched && formSaveCliente.get('email').hasError('required')">
+							E-mail é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Responsável</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSaveCliente.controls.responsavel">
+						<div class="input-error" *ngIf="formSaveCliente.get('responsavel').touched && formSaveCliente.get('responsavel').hasError('required')">
+							Responsável é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao cinza" (click)="fecharModalCliente()">Cancelar</button>
+					<input class="botao" type="submit" (click)="sendFormCliente(formSaveCliente.value)" id="salvar-user" value="Salvar">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+<app-dialog [(visible)]="showModalImprimir" class="modal-extra-large3">
+
+	<div class="dialog-header">
+		Imprimir Simulação
+		<a (click)="fecharModalImp()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<div class="box-impressao" id="myTableElementId" *ngIf="objSimulacao.consumoContrado">
+			<p style="font-size: 35px; line-height: 30px; font-weight: bold; text-align: center; margin-bottom: 15px;">SIMULAÇÃO</p>
+			<div style="margin-bottom: 30px; border: 1px solid #000000; padding: 10px;">
+				<div class="row">
+					<div class="col-md-2">
+						<img class="side-bar-button-long" src="assets/img/logo.png" style="width: 100%;" />
+					</div>
+					<div class="col-md-10">
+						<p style="font-size: 45px; line-height: 40px; margin-bottom: 0; font-weight: bold; margin-top: 50px; text-align: right;">{{ objImprimir.parceiro[0].razaoSocial }}</p>
+					</div>
+				</div>
+			</div>
+			<p class="title-resumo">RESUMO</p>
+
+			<hr />
+
+			<div class="row" style="margin-bottom: 30px;">
+				<!-- <div class="col-md-3">
+					<label>Nome Usina</label>
+					<span class="valor-resumo">{{ objImprimir.nomeUsina[0].nome }}</span>
+				</div> -->
+				<div class="col-md-3">
+					<label>Classe</label>
+					<span class="valor-resumo">{{ objImprimir.nomeRede[0].descricao }}</span>
+				</div>
+				<!-- <div class="col-md-3">
+					<label>Parceiro</label>
+					<span class="valor-resumo">{{ objImprimir.parceiro[0].razaoSocial }}</span>
+				</div> -->
+				<div class="col-md-3">
+					<label>Vendedor</label>
+					<span class="valor-resumo">{{ dadosUser.nome }}</span>
+				</div>
+			</div>
+			
+			<p class="title-resumo" style="margin-bottom: 30px; font-size: 20px;">Histórico de Consumo</p>
+			
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-md-2" *ngFor="let item of objImprimir.listConsumo; let x = index">
+					<label>Mês {{x+1}}</label>
+					<span class="valor-resumo" style="text-align: right !important;">{{ item.toLocaleString('pt-BR') }}</span>
+				</div>
+			</div>
+
+			<hr />
+			<div class="row">
+				<div class="col-md-3">
+					<label>Consumo Contratado</label>
+					<span class="valor-resumo">{{ objSimulacao.consumoContrado.toFixed(0) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Valor Financiado</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorFinanciado) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Taxa Minima CEMIG Mês</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.taxaMinimaCemigMes) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Número de Parcelas do Financiamento</label>
+					<span class="valor-resumo">{{ objSimulacao.numeroParcelasFinanciamento }}</span>
+				</div>
+		
+				<div class="col-md-3">
+					<label>Custo da Usina (O&M)</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.custoUsinaCooperativaMes) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Primeira Parcela do Financiamento</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorPrimeiraParcelaFinanciamento) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Última Parcela do Financiamento</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorUltimaParcelaFinanciamento) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Valor Economizado Mês/CEMIG</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoMes) }}</span>
+				</div>
+		
+				
+				<div class="col-md-3">
+					<label>Valor Economizado Total/CEMIG</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoTotal) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Percentual de Participação na Geração da Usina/Mês</label>
+					<span class="valor-resumo">{{ objSimulacao.direitoEnegiaInjetadaUsinaGeradora.toFixed(8) }}</span>
+				</div>
+		
+				<div class="col-md-3">
+					<label>Percentual Redução CEMIG</label>
+					<span class="valor-resumo">{{ objSimulacao.percentualReducaoContaCemig.toFixed(1) }}</span>
+				</div>
+				<!-- <div class="col-md-3">
+					<label>Comissão do Vendedor</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.comissaoVendedor) }}</span>
+				</div> -->
+				<!-- <div class="col-md-3">
+					<label>Taxa Interna de Retorno</label>
+					<span class="valor-resumo">{{ objSimulacao.taxaInternaRetorno.toFixed(1) }}</span>
+				</div> -->
+				<div class="col-md-3">
+					<label>Desembolso</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.realPago) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Efetivamente Pago</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.efetivamentePago) }}</span>
+				</div>
+			</div>
+
+			<hr />
+
+			<p class="title-resumo" style="margin-top: 30px; margin-bottom: 30px; font-size: 20px;">GRÁFICO COMPARATIVO</p>
+
+			<canvas baseChart *ngIf="showGrafico"
+				class="grafico-box"
+				[datasets]="barChartData"
+				[labels]="barChartLabels"
+				[options]="barChartOptions"
+				[legend]="barChartLegend"
+				[colors]="lineChartColors"
+				[chartType]="barChartType">
+			</canvas>
+
+			<hr />
+
+		</div>
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="imprimir()">Imprimir</button>
+					<button class="botao cinza" (click)="fecharModalImp()">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>

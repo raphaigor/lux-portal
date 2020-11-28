@@ -1,0 +1,431 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+	<section class="Title">
+		Cadastro >> Parceiro
+	</section>
+
+	<section class="BoxApp">
+		<form id="form-search-clientes" [formGroup]="formSearch">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nome</label>
+						<input class="form-control" id="nomeSearch" type="text" placeholder="Nome do Parceiro..." [formControl]="formSearch.controls.descricao">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Status</label>
+						<select id="status" [formControl]="formSearch.controls.status">
+							<option value="ATIVO" selected>ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Início</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSearch.controls.dataCadastroInicio">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Data Cadastro Fim</label>
+						<input class="form-control" id="nomeSearch" type="text" [formControl]="formSearch.controls.dataCadastroFim">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button (click)="showModalCadastro = !showModalCadastro" class="botao">Novo</button>
+				</div>
+				<div class="col-md-6">
+					<div class="app-boxBotoes--direita">
+						<button class="botao cinza" (click)="limparForm()">Limpar</button>
+						<input class="botao" type="submit" (click)="pesquisarParceiros(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<section class="BoxApp">
+		<ngx-datatable #myTable
+			class="bootstrap"
+			[rows]="listParceiros"
+			[columnMode]="'force'"
+			[headerHeight]="50"
+			[footerHeight]="50"
+			[rowHeight]="'auto'"
+			[messages]="{emptyMessage: 'Sem dados...'}"
+			[limit]="15">
+
+			<ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" name="Ações">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					<div class="datatable-body-box-actions" *ngIf="row.status == 'ATIVO'">
+						<a class="home-icon" (click)="editarParceiro(row)" title="Editar">
+							<i class="fas fa-pencil-alt"></i>
+						</a>
+						<a class="home-icon" (click)="inativarParceiro(row)" title="Inativar">
+							<i class="fas fa-times"></i>
+						</a>
+					</div>
+					<div class="datatable-body-box-actions" *ngIf="row.status == 'INATIVO'">
+						<a class="home-icon" (click)="ativarParceiro(row)" title="Ativar">
+							<i class="fas fa-check"></i>
+						</a>
+					</div>
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+			<ngx-datatable-column name="Razão Social" prop="razaoSocial"></ngx-datatable-column>
+			<ngx-datatable-column name="Status" prop="status"></ngx-datatable-column>
+			<ngx-datatable-column name="Data Cadastro" prop="dataCadastro">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataCadastro) }} 
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Data Alteração" prop="dataUltimaAtualizacao">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ formatDate(row.dataUltimaAtualizacao) }} 
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-footer>
+				<ng-template 
+				ngx-datatable-footer-template 
+				let-rowCount="rowCount"
+				let-pageSize="pageSize"
+				let-selectedCount="selectedCount"
+				let-curPage="curPage"
+				let-offset="offset">
+				<div>
+					<div class="page-count">
+					Total de Registros: {{rowCount}}
+					</div>
+				</div>
+				<datatable-pager
+						[pagerLeftArrowIcon]="'fa fa-angle-double-left'"
+						[pagerRightArrowIcon]="'fa fa-angle-double-right '"
+						[pagerPreviousIcon]="'fa fa-angle-left'"
+						[pagerNextIcon]="'fa fa-angle-right '"
+						[page]="curPage"
+						[size]="pageSize"
+						[count]="rowCount"
+						[hidden]="!((rowCount / pageSize) > 1)"
+						(change)="table.onFooterPage($event)">
+					</datatable-pager>
+				</ng-template>
+			</ngx-datatable-footer>
+
+		</ngx-datatable>
+	</section>
+
+</div>
+
+<app-dialog [(visible)]="showModalCadastro">
+
+	<div class="dialog-header">
+		Cadastro de Parceiro
+		<a (click)="fecharModal()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+
+		<ul class="app-tabsButons">
+			<li [ngClass]="{'active': showBoxDados}">
+				<a (click)="selecionaTab('dados')">Dados Básicos</a>
+			</li>
+			<li [ngClass]="{'active': showBoxUsina}">
+				<a (click)="selecionaTab('usina')">Usina</a>
+			</li>
+			<li [ngClass]="{'active': showBoxParam}">
+				<a (click)="selecionaTab('param')">Parâmetros Financeiros</a>
+			</li>
+		</ul>
+
+		<div class="app-tabsBox">
+			<div class="app-tabsBox--in" [ngClass]="{'active': showBoxDados}">
+				<form id="form-save-usina" [formGroup]="formSave">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="exampleInputEmail1">CPF/CNPJ</label>
+								<input class="form-control" (blur)="format(formSave.value.cnpjCpf)" type="text" [formControl]="formSave.controls.cnpjCpf">
+								<div class="input-error" *ngIf="formSave.get('cnpjCpf').touched && formSave.get('cnpjCpf').hasError('required')">
+									CPF/CNPJ é obrigatório.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Razão Social</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.razaoSocial">
+								<div class="input-error" *ngIf="formSave.get('razaoSocial').touched && formSave.get('razaoSocial').hasError('required')">
+									Razão Social é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Nome Fantasia</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.fantasia">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">CEP</label>
+								<input class="form-control" id="nomeSearch" type="text" mask="00.000-000" (blur)="buscarCep(formSave.value.cep)" [formControl]="formSave.controls.cep">
+								<div class="input-error" *ngIf="formSave.get('cep').touched && formSave.get('cep').hasError('required')">
+									CEP é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Endereço</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.endereco">
+								<div class="input-error" *ngIf="formSave.get('endereco').touched && formSave.get('endereco').hasError('required')">
+									Endereço é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Número</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.numero">
+								<div class="input-error" *ngIf="formSave.get('numero').touched && formSave.get('numero').hasError('required')">
+									Número é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Complemento</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.complemento">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Bairro</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.bairro">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Cidade</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.cidade">
+								<div class="input-error" *ngIf="formSave.get('cidade').touched && formSave.get('cidade').hasError('required')">
+									Cidade é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Estado</label>
+								<select #t [formControl]="formSave.controls.uf">
+									<option *ngFor="let estado of listEstados; let i = index" [value]="estado.sigla">{{ estado.nome }}</option>
+								</select>
+								<div class="input-error" *ngIf="formSave.get('uf').touched && formSave.get('uf').hasError('required')">
+									Estado é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Telefone</label>
+								<input class="form-control" id="nomeSearch" type="text" mask="(00) 00000-0000" [formControl]="formSave.controls.contato1">
+								<div class="input-error" *ngIf="formSave.get('contato1').touched && formSave.get('contato1').hasError('required')">
+									Telefone é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">E-mail</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.email">
+								<div class="input-error" *ngIf="formSave.get('email').touched && formSave.get('email').hasError('required')">
+									E-mail é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Responsável</label>
+								<input class="form-control" id="nomeSearch" type="text" [formControl]="formSave.controls.responsavel">
+								<div class="input-error" *ngIf="formSave.get('responsavel').touched && formSave.get('responsavel').hasError('required')">
+									Responsável é obrigatório.
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="app-tabsBox--in" [ngClass]="{'active': showBoxParam}">
+				<form id="form-save-oem" [formGroup]="formParams">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">CDI</label>
+								<input currencyMask class="form-control" (blur)="calcForm()" formControlName="cdi" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 1 }"/>
+								<div class="input-error" *ngIf="formParams.get('cdi').touched && formParams.get('cdi').hasError('required')">
+									CDI é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Correção CDI %</label>
+								<input currencyMask class="form-control" (blur)="calcForm()" formControlName="correcaoCdi" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								<div class="input-error" *ngIf="formParams.get('correcaoCdi').touched && formParams.get('correcaoCdi').hasError('required')">
+									Correção CDI é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Correção Financeira am %</label>
+								<input currencyMask readonly class="form-control" formControlName="correcaoAm" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 9 }"/>
+								<div class="input-error" *ngIf="formParams.get('correcaoAm').touched && formParams.get('correcaoAm').hasError('required')">
+									Correção AM é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Correção Tarifa %</label>
+								<input currencyMask class="form-control" formControlName="correcaoTarifa" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								<div class="input-error" *ngIf="formParams.get('correcaoTarifa').touched && formParams.get('correcaoTarifa').hasError('required')">
+									Correção Tarifa é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Correção Carência am %</label>
+								<input currencyMask class="form-control" formControlName="correcaoCarencia" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 9 }"/>
+								<div class="input-error" *ngIf="formParams.get('correcaoCarencia').touched && formParams.get('correcaoCarencia').hasError('required')">
+									Correção Carência é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Prazo Carência</label>
+								<input currencyMask class="form-control" formControlName="prazoCarencia" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								<div class="input-error" *ngIf="formParams.get('prazoCarencia').touched && formParams.get('prazoCarencia').hasError('required')">
+									Prazo Carência é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Prazo Financiamento</label>
+								<input currencyMask class="form-control" formControlName="prazoFinanciamento" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								<div class="input-error" *ngIf="formParams.get('prazoFinanciamento').touched && formParams.get('prazoFinanciamento').hasError('required')">
+									Prazo Financiamento é obrigatório.
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Tabela Financeira Meses</label>
+								<input currencyMask class="form-control" formControlName="qtdMesesSimulacao" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+								<div class="input-error" *ngIf="formParams.get('qtdMesesSimulacao').touched && formParams.get('qtdMesesSimulacao').hasError('required')">
+									Meses Sim Price é obrigatório.
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="app-tabsBox--in" [ngClass]="{'active': showBoxUsina}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="box-usinas">
+							<form id="form-add-usina" [formGroup]="formUsina">
+								<div class="row">
+									<div class="col-md-11">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Usina</label>
+											<select #t [formControl]="formUsina.controls.usinaId">
+												<option *ngFor="let usina of listUsinas; let i = index" [value]="usina.id">{{ usina.nome }}</option>
+											</select>
+											<div class="input-error" *ngIf="formUsina.get('usinaId').touched && formUsina.get('usinaId').hasError('required')">
+												Usina é obrigatório.
+											</div>
+										</div>
+									</div>
+									<div class="col-md-1">
+										<button class="botao cinza botao-mais" style="margin-top: 22px;" (click)="addUsina(formUsina.value)">+</button>
+									</div>
+								</div>
+							</form>
+							<div class="item-usina" *ngFor="let usina of listUsinasBase; let i = index">
+								<a (click)="removerLinha(i)">X</a>
+								{{ usina.nome }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita" *ngIf="showBtSalvar">
+					<button class="botao cinza" (click)="fecharModal()">Cancelar</button>
+					<input class="botao" type="submit" (click)="sendForm(formSave.value, formParams.value)" id="salvar-user" value="Salvar">
+				</div>
+				<div class="app-boxBotoes--direita" *ngIf="!showBtSalvar">
+					<img class="loader-bt-save" src="assets/img/ajax-loader.gif" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>
+
+
+<app-dialog [(visible)]="showModalDesativar">
+
+	<div class="dialog-header">
+		Deseja desativar o Parceiro "{{ objDesativar.razaoSocial }}"?
+		<a (click)="fecharModalDesativar()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="app-boxBotoes">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="fecharModalDesativar()">Cancelar</button>
+					<input class="botao cinza" type="submit" (click)="sendDesativar()" id="salvar-oport" value="Desativar">
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</app-dialog>	

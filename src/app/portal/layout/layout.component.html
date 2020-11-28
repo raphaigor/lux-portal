@@ -1,0 +1,118 @@
+<div class="header">
+
+	<!-- <div style="width: 20%; display: inline-block;">
+		<a class="header-btLogo" [ngClass]="{'header-btLogo--open': menuOpen}" (click)="openMenu()">
+			<i class="fas fa-bars" [ngClass]="{'no-show': menuOpen}"></i>
+			<img class="header-logo-ico" [ngClass]="{'header-logo--open': menuOpen, 'no-show': !menuOpen}" src="assets/img/logo-in-black.png" />
+		</a>
+	
+		<img class="header-logo" [ngClass]="{'header-logo--open': menuOpen, 'no-show': menuOpen}" src="assets/img/logo-in.png" />
+	</div> -->
+
+	<div class="header-box-user">
+		<i class="fa fa-user"></i>
+		<p class="header-user-name">{{ dadosUser.nome }}</p>
+		<p class="header-user-email">{{ dadosUser.login }}</p>
+		<a (click)="logout()" class="bt-logout" title="Sair">
+			<i class="fas fa-sign-out-alt"></i>
+		</a>
+	</div>
+
+</div>
+
+<nav class="side-bar" [ngClass]="{'side-bar--open': menuOpen}" (mouseenter)="openMenu()" (mouseleave)="openMenu()">
+	<a class="side-bar-button">
+		<img class="side-bar-button-short" src="assets/img/icon.png" />
+		<img class="side-bar-button-long" src="assets/img/logo-ic.png" />
+	</a>
+	<ul class="menu" [ngClass]="{'menu--open': menuOpen}">
+		<li>
+			<a href="./#/home"><i class="fas fa-home"></i><span>HOME</span></a>
+		</li>
+		<li *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO' && dadosUser.tipoUsuario != 'COLABORADOR'">
+			<a>
+				<i class="fas fa-clipboard-list"></i>
+				<span>Cadastros</span>
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="./#/cadastros/usina">
+						<i class="fas fa-angle-right"></i>
+						<span>USINA</span>
+					</a>
+					<a href="./#/cadastros/oem">
+						<i class="fas fa-angle-right"></i>
+						<span>OEM</span>
+					</a>
+					<!-- <a href="./#/cadastros/rede-eletrica">
+						<i class="fas fa-angle-right"></i>
+						<span>Rede Elétrica</span>
+					</a> -->
+					<a href="./#/cadastros/faturamento">
+						<i class="fas fa-angle-right"></i>
+						<span>Faturamento</span>
+					</a>
+					<!-- <a href="./#/cadastros/parametro-financeiro">
+						<i class="fas fa-angle-right"></i>
+						<span>Parâmetro Financeiro</span>
+					</a> -->
+					<!-- <a href="./#/cadastros/concorrente">
+						<i class="fas fa-angle-right"></i>
+						<span>Concorrente</span>
+					</a> -->
+					<a href="./#/cadastros/parceiro">
+						<i class="fas fa-angle-right"></i>
+						<span>Parceiro</span>
+					</a>
+					<a href="./#/cadastros/vendedor">
+						<i class="fas fa-angle-right"></i>
+						<span>Vendedor</span>
+					</a>
+					<a href="./#/cadastros/cliente">
+						<i class="fas fa-angle-right"></i>
+						<span>Cliente</span>
+					</a>
+					<a href="./#/cadastros/colaborador">
+						<i class="fas fa-angle-right"></i>
+						<span>Colaborador</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li *ngIf="dadosUser.tipoUsuario != 'COLABORADOR'">
+			<a href="./#/simulador"><i class="fas fa-rocket"></i><span>Simulação</span></a>
+		</li>
+		<li *ngIf="dadosUser.tipoUsuario != 'COLABORADOR'">
+			<a href="./#/vendas"><i class="fas fa-dollar-sign"></i><span>Vendas</span></a>
+		</li>
+		<li>
+			<a><i class="fas fa-print"></i><span>Relatórios</span></a>
+			<ul class="sub-menu">
+				<li>
+					<a href="./#/relatorios/vendedor">
+						<i class="fas fa-angle-right"></i>
+						<span>VENDAS VENDEDOR</span>
+					</a>
+				</li>
+				<li *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO'">
+					<a href="./#/relatorios/resultado-vendedor">
+						<i class="fas fa-angle-right"></i>
+						<span>RESULTADO VENDEDOR</span>
+					</a>
+				</li>
+				<li *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO' && dadosUser.tipoUsuario != 'COLABORADOR'">
+					<a href="./#/relatorios/usina">
+						<i class="fas fa-angle-right"></i>
+						<span>USINA</span>
+					</a>
+				</li>
+				<li *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO' && dadosUser.tipoUsuario != 'COLABORADOR'">
+					<a href="./#/relatorios/tipo-rede">
+						<i class="fas fa-angle-right"></i>
+						<span>TIPO DE REDE</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</nav>

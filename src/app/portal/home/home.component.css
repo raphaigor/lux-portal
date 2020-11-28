@@ -1,0 +1,23 @@
+.box-banner {
+    background: url('../../../assets/img/banner.jpg');
+    height: calc(100vh - 170px);
+    background-size: cover;
+    position: relative;
+}
+
+.box-title {
+    color: #ffffff;
+    font-size: 60px;
+    text-shadow: 2px 3px 14px #000000;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.box-title small {
+    font-size: 40px;
+}

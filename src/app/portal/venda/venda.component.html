@@ -1,0 +1,434 @@
+<app-layout></app-layout>
+
+<div id="wrap">
+
+	<section class="Title">
+		Vendas
+	</section>
+
+	<section class="BoxApp">
+		<form id="form-search-clientes" [formGroup]="formSearch">
+			<ng-container *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO'">
+				<div class="row" >
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Usina</label>
+									<select id="status" [formControl]="formSearch.controls.usinaId" (change)="buscarCapacidade(formSearch.value.usinaId)">
+										<option *ngFor="let usina of listUsinas; let i = index" [value]="usina.id">{{ usina.nome }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Parceiro</label>
+									<select id="status" [formControl]="formSearch.controls.parceiroId">
+											<option *ngFor="let parc of listParceiro; let i = index" [value]="parc.id">{{ parc.razaoSocial }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Vendedor</label>
+									<select id="status" [formControl]="formSearch.controls.vendedorId">
+										<option *ngFor="let vend of listVendedores; let i = index" [value]="vend.id">{{ vend.nome }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Cliente</label>
+									<select id="status" [formControl]="formSearch.controls.clienteId">
+										<option *ngFor="let cliente of listClientes; let i = index" [value]="cliente.id">{{ cliente.nome }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Status</label>
+									<select id="status" [formControl]="formSearch.controls.status">
+										<option value="PENDENTE">PENDENTE</option>
+										<option value="PENDENTE_CAPACIDADE">PENDENTE CAPACIDADE</option>
+										<option value="AGUARDANDO_VALIDACAO">AGUARDANDO VALIDACAO</option>
+										<option value="CONCLUIDO">CONCLUIDO</option>
+										<option value="CANCELADO">CANCELADO</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<section *ngIf="objUsina.id">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12">
+											<label>Capacidade da Usina</label>
+											<span class="valor-usina">{{ objUsina.geracaoTotalKwh.toLocaleString('pt-BR') }}</span>
+										</div>
+										<div class="col-md-12">
+											<label>Capacidade Contratada</label>
+											<span class="valor-usina">{{ objUsina.capacidadeContratada.toLocaleString('pt-BR') }}</span>
+										</div>
+										<div class="col-md-12">
+											<label>Capacidade Disponível</label>
+											<span class="valor-usina">{{ (objUsina.geracaoTotalKwh - objUsina.capacidadeContratada).toLocaleString('pt-BR') }}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<ng-container *ngIf="showChart2">
+										<canvas baseChart
+											class="grafico-box"
+											[data]="doughnutChartData"
+											[labels]="doughnutChartLabels"
+											[colors]="doughnutChartColors"
+											[options]="doughnutChartOptions"
+											[chartType]="doughnutChartType">
+										</canvas>
+									</ng-container>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="">
+							<button class="botao cinza" (click)="limparForm()">Limpar</button>
+							<input class="botao" type="submit" (click)="pesquisarVendas(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+						</div>
+					</div>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="dadosUser.tipoUsuario === 'USUARIO_TERCEIRO'">
+				<div class="row" >
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Parceiro</label>
+									<select id="status" [formControl]="formSearch.controls.parceiroId">
+											<option *ngFor="let parc of listParceiro; let i = index" [value]="parc.parceiroId">{{ parc.parceiroRazaoSocial }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Cliente</label>
+									<select id="status" [formControl]="formSearch.controls.clienteId">
+										<option *ngFor="let cliente of listClientes; let i = index" [value]="cliente.id">{{ cliente.nome }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Status</label>
+									<select id="status" [formControl]="formSearch.controls.status">
+										<option value="PENDENTE">PENDENTE</option>
+										<option value="PENDENTE_CAPACIDADE">PENDENTE CAPACIDADE</option>
+										<option value="AGUARDANDO_VALIDACAO">AGUARDANDO VALIDACAO</option>
+										<option value="CONCLUIDO">CONCLUIDO</option>
+										<option value="CANCELADO">CANCELADO</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="ajuste-bts">
+							<button class="botao cinza" (click)="limparForm()">Limpar</button>
+							<input class="botao" type="submit" (click)="pesquisarVendas(formSearch.value)" name="logar" id="logar" value="Pesquisar">
+						</div>
+					</div>
+				</div>
+			</ng-container>
+		</form>
+	</section>
+
+	<section class="BoxApp">
+		<ngx-datatable #myTable
+			class="bootstrap"
+			[rows]="listVendas"
+			[columnMode]="'force'"
+			[headerHeight]="50"
+			[footerHeight]="50"
+			[rowHeight]="'auto'"
+			[messages]="{emptyMessage: 'Sem dados...'}"
+			[limit]="15">
+
+			<ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" name="Ações">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					<div class="datatable-body-box-actions">
+						<a class="home-icon" href="{{ URL_FILE+row.id+'.'+row.tipoArquivo }}" target="_bank" title="Ver Conta CEMIG">
+							<i class="fas fa-vote-yea"></i>
+						</a>
+						<a class="home-icon" (click)="executar(row)" title="Executar" *ngIf="row.status != 'CONCLUIDO' && row.status != 'CANCELADO'">
+							<i class="fas fa-caret-right"></i>
+						</a>
+						<a class="home-icon" (click)="imprimir(row)" title="Imprimir Venda">
+							<i class="fas fa-print"></i>
+						</a>
+					</div>
+				</ng-template>
+			</ngx-datatable-column>
+
+			<ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+			<ngx-datatable-column name="Cliente" prop="clienteNome"></ngx-datatable-column>
+			<ngx-datatable-column name="Cidade/Estado" prop="clienteNome">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ row.cidade }}/{{ row.uf }}
+				</ng-template>
+			</ngx-datatable-column>
+			
+			<ngx-datatable-column name="Cons Contratado" prop="consumoContratado">
+				<ng-template ngx-datatable-cell-template let-row="row">
+					{{ row.consumoContratado.toLocaleString('pt-BR') }}
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Vendedor" prop="vendedorNome"></ngx-datatable-column>
+			<ngx-datatable-column name="Instalação" prop="numeroInstalacao"></ngx-datatable-column>
+			<ngx-datatable-column name="Usina" prop="resumoPriceUsinaNome" *ngIf="dadosUser.tipoUsuario !== 'USUARIO_TERCEIRO'"></ngx-datatable-column>
+			<ngx-datatable-column name="Parceiro" prop="parceiroRazaoSocial"></ngx-datatable-column>
+			<ngx-datatable-column name="Status" prop="status"></ngx-datatable-column>
+
+
+			<ngx-datatable-footer>
+				<ng-template 
+				ngx-datatable-footer-template 
+				let-rowCount="rowCount"
+				let-pageSize="pageSize"
+				let-selectedCount="selectedCount"
+				let-curPage="curPage"
+				let-offset="offset">
+				<div>
+					<div class="page-count">
+					Total de Registros: {{rowCount}}
+					</div>
+				</div>
+				<datatable-pager
+						[pagerLeftArrowIcon]="'fa fa-angle-double-left'"
+						[pagerRightArrowIcon]="'fa fa-angle-double-right '"
+						[pagerPreviousIcon]="'fa fa-angle-left'"
+						[pagerNextIcon]="'fa fa-angle-right '"
+						[page]="curPage"
+						[size]="pageSize"
+						[count]="rowCount"
+						[hidden]="!((rowCount / pageSize) > 1)"
+						(change)="table.onFooterPage($event)">
+					</datatable-pager>
+				</ng-template>
+			</ngx-datatable-footer>
+
+		</ngx-datatable>
+	</section>
+
+</div>
+
+<app-dialog [(visible)]="showModal" class="modal-small">
+
+	<div class="dialog-header">
+		Alterar o Status da Venda
+		<a (click)="fecharModal()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<form id="form-simular" [formGroup]="formStatus">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Status</label>
+						<select id="status" [formControl]="formStatus.controls.status" *ngIf="dadosUser.tipoUsuario != 'USUARIO_TERCEIRO'">
+							<option value="PENDENTE">PENDENTE</option>
+							<option value="PENDENTE_CAPACIDADE">PENDENTE CAPACIDADE</option>
+							<option value="CONCLUIDO">CONCLUIDO</option>
+							<option value="CANCELADO">CANCELADO</option>
+						</select>
+						<select id="status" [formControl]="formStatus.controls.status" *ngIf="dadosUser.tipoUsuario == 'USUARIO_TERCEIRO'">
+							<option *ngFor="let status of listStatus" [value]="status">{{ status }}</option>
+							<option value="CANCELADO">CANCELADO</option>
+						</select>
+						<div class="input-error" *ngIf="formStatus.get('status').touched && formStatus.get('status').hasError('required')">
+							Status é obrigatório.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Observação</label>
+						<textarea [formControl]="formStatus.controls.observacao"></textarea>
+						<div class="input-error" *ngIf="formStatus.get('observacao').touched && formStatus.get('observacao').hasError('required')">
+							Observação é obrigatório.
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="fecharModal()">Cancelar</button>
+					<input class="botao cinza" type="submit" (click)="sendAlterar(formStatus.value)" id="salvar-oport" value="Alterar">
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</app-dialog>		
+
+<app-dialog [(visible)]="showModalImpressao" class="modal-extra-large3">
+
+	<div class="dialog-header">
+		Imprimir Venda
+		<a (click)="fecharModalImp()" aria-label="Close" class="dialog__close-btn">x</a>
+	</div>
+
+	<div class="dialog-body">
+		<div class="box-impressao" id="myTableElementId">
+			<p style="font-size: 35px; line-height: 30px; font-weight: bold; text-align: center; margin-bottom: 15px;">VENDA - {{ objImpressao.status  }}</p>
+			<div style="margin-bottom: 30px; border: 1px solid #000000; padding: 10px;">
+				<div class="row">
+					<div class="col-md-2">
+						<img class="side-bar-button-long" src="assets/img/logo.png" style="width: 100%;" />
+					</div>
+					<div class="col-md-10">
+						<p style="font-size: 45px; line-height: 40px; margin-bottom: 0; font-weight: bold; margin-top: 50px; text-align: right;">{{ objImpressao.parceiroRazaoSocial }}</p>
+					</div>
+				</div>
+			</div>
+			<p class="title-resumo">RESUMO</p>
+
+			<hr />
+
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-md-4">
+					<label>Cliente</label>
+					<span class="valor-resumo">{{ objImpressao.clienteNome }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Cidade</label>
+					<span class="valor-resumo">{{ objImpressao.cidade }}/{{ objImpressao.uf }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Número da Instalação</label>
+					<span class="valor-resumo">{{ objImpressao.numeroInstalacao }}</span>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="row" style="margin-bottom: 30px;">
+				<!-- <div class="col-md-4">
+					<label>Nome Usina</label>
+					<span class="valor-resumo">{{ objImpressao.resumoPriceUsinaNome }}</span>
+				</div> -->
+				<div class="col-md-4">
+					<label>Classe</label>
+					<span class="valor-resumo">{{ objImpressao.resumoPriceTipoRedeEletricaDescricao }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Nome do Vendedor</label>
+					<span class="valor-resumo">{{ objImpressao.vendedorNome }}</span>
+				</div>
+			</div>
+			<hr />
+			<div class="row" *ngIf="objSimulacao.consumoContrado">
+				<div class="col-md-4">
+					<label>Consumo Contratado</label>
+					<span class="valor-resumo">{{ objSimulacao.consumoContrado.toFixed(0) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Valor Financiado</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorFinanciado) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Taxa Minima CEMIG Mês</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.taxaMinimaCemigMes) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Número de Parcelas do Financiamento</label>
+					<span class="valor-resumo">{{ objSimulacao.numeroParcelasFinanciamento }}</span>
+				</div>
+		
+				<div class="col-md-4">
+					<label>Custo da Usina (O&M)</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.custoUsinaCooperativaMes) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Primeira Parcela do Financiamento</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorPrimeiraParcelaFinanciamento) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Última Parcela do Financiamento</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorUltimaParcelaFinanciamento) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Valor Economizado Mês/CEMIG</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoMes) }}</span>
+				</div>
+				
+				<div class="col-md-4">
+					<label>Valor Economizado Total/CEMIG</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.valorEconomizadoTotal) }}</span>
+				</div>
+				<div class="col-md-4">
+					<label>Percentual de Participação na Geração da Usina/Mês</label>
+					<span class="valor-resumo">{{ objSimulacao.direitoEnegiaInjetadaUsinaGeradora.toFixed(8) }}</span>
+				</div>
+		
+				<div class="col-md-4">
+					<label>Percentual Redução CEMIG</label>
+					<span class="valor-resumo">{{ objSimulacao.percentualReducaoContaCemig.toFixed(1) }}</span>
+				</div>
+				<!-- <div class="col-md-4">
+					<label>Comissão do Vendedor</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.comissaoVendedor) }}</span>
+				</div> -->
+				<!-- <div class="col-md-4">
+					<label>Taxa Interna de Retorno</label>
+					<span class="valor-resumo">{{ objSimulacao.taxaInternaRetorno.toFixed(1) }}</span>
+				</div> -->
+				<div class="col-md-4">
+					<label>Desembolso</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.realPago) }}</span>
+				</div>
+				<div class="col-md-3">
+					<label>Efetivamente Pago</label>
+					<span class="valor-resumo">R$ {{ formatValorReal(objSimulacao.efetivamentePago) }}</span>
+				</div>
+			</div>
+
+			<p class="title-resumo" style="margin-top: 30px; margin-bottom: 30px; font-size: 20px;">GRÁFICO COMPARATIVO</p>
+
+			<canvas baseChart *ngIf="showGrafico"
+				class="grafico-box"
+				[datasets]="barChartData"
+				[labels]="barChartLabels"
+				[options]="barChartOptions"
+				[legend]="barChartLegend"
+				[colors]="lineChartColors"
+				[chartType]="barChartType">
+			</canvas>
+
+		</div>
+
+	</div>
+
+	<div class="dialog-footer">
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="app-boxBotoes--direita">
+					<button class="botao" (click)="sendImprimir()">Imprimir</button>
+					<button class="botao cinza" (click)="fecharModalImp()">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</app-dialog>

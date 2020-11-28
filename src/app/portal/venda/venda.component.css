@@ -1,0 +1,64 @@
+.label-resumo {
+    font-size: 14px;
+}
+
+.valor-usina {
+    background: #c9c9c9;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 0 8px;
+    display: inline-block;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.valor-resumo {
+    background: #b0b0b0;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 4px 10px;
+    display: inline-block;
+    text-align: right;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.ajuste-bts {
+    width: 100%;
+    margin-top: 22px;
+}
+
+.title-resumo {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.box-impressao {
+    padding: 40px 60px;
+}
+
+.box-impressao label {
+    font-size: 15px;
+}
+
+.valor-parceiro {
+    background: #c9c9c9;
+    width: 100%;
+    line-height: 25px;
+    border-radius: 12px;
+    padding: 4px 10px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#myTableElementId .valor-resumo {
+    text-align: left;
+}
